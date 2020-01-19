@@ -1,0 +1,79 @@
+Last login: Wed Jan 15 13:48:01 on ttys001
+(base) Summers-MacBook-Air:~ summermcgrogan$ cd Downloads/Homework01/music-mashup/country/BobMarley/Guns-n-Roses.jpg rock/Guns-n-Roses.jpg
+-bash: cd: Downloads/Homework01/music-mashup/country/BobMarley/Guns-n-Roses.jpg: Not a directory
+(base) Summers-MacBook-Air:~ summermcgrogan$ cd Downloads
+(base) Summers-MacBook-Air:Downloads summermcgrogan$ Homework01
+-bash: Homework01: command not found
+(base) Summers-MacBook-Air:Downloads summermcgrogan$ cd Homework01
+(base) Summers-MacBook-Air:Homework01 summermcgrogan$ cd music-mashup
+(base) Summers-MacBook-Air:music-mashup summermcgrogan$ mv country/BobMarley/Guns-n-Roses.jpg
+usage: mv [-f | -i | -n] [-v] source target
+       mv [-f | -i | -n] [-v] source ... directory
+(base) Summers-MacBook-Air:music-mashup summermcgrogan$ mv country/music-mashup/BobMarley/Guns-n-Roses.jpg
+usage: mv [-f | -i | -n] [-v] source target
+       mv [-f | -i | -n] [-v] source ... directory
+(base) Summers-MacBook-Air:music-mashup summermcgrogan$ mv country/music-mashup/BobMarley/Guns-n-Roses.jpg rock/Guns-n-Roses.jpg
+mv: rename country/music-mashup/BobMarley/Guns-n-Roses.jpg to rock/Guns-n-Roses.jpg: No such file or directory
+(base) Summers-MacBook-Air:music-mashup summermcgrogan$ country/BobMarley reggae/BobMarley
+-bash: country/BobMarley: is a directory
+(base) Summers-MacBook-Air:music-mashup summermcgrogan$ mv country/BobMarley/Guns-n-Roses.jpg rock/Guns-n-Roses.jpg
+(base) Summers-MacBook-Air:music-mashup summermcgrogan$ mv country/NickiMinaj/FourTops.jpg soul/FourTops.jpg
+(base) Summers-MacBook-Air:music-mashup summermcgrogan$ mv country/OhioPlayers/BobMarley.jpg country/BobMarley/BobMarley.jpg
+(base) Summers-MacBook-Air:music-mashup summermcgrogan$ mv funk/AlanisMorissette/juice-wrld_12.jpg hip-hop-rap/juice-wrld_12.jpg
+(base) Summers-MacBook-Air:music-mashup summermcgrogan$ funk/FourTops/cardi_18.jpg hip-hop-rap/cardi_18.jpg
+-bash: funk/FourTops/cardi_18.jpg: No such file or directory
+(base) Summers-MacBook-Air:music-mashup summermcgrogan$ mv funk/FourTops/cardi-b_18.jpg hip-hop-rap/cardi-b_18.jpg
+(base) Summers-MacBook-Air:music-mashup summermcgrogan$ mv funk/GunsNRoses/DollyParton.jpg country/DollyParton.jpg
+(base) Summers-MacBook-Air:music-mashup summermcgrogan$ mv hip-hop-rap/Aerosmith/nicki-minaj_13.jpg hip-hop-rap
+(base) Summers-MacBook-Air:music-mashup summermcgrogan$ mv hip-hop-rap/PatsyCline/Funkadelic.jpg funk/Funkadelic.jpg
+(base) Summers-MacBook-Air:music-mashup summermcgrogan$ mv hip-hop-rap/SmokeyRobinson/AlanisMorissette.png rock/AlanisMorissette.png
+(base) Summers-MacBook-Air:music-mashup summermcgrogan$ mv reggae/Funkadelic/GarthBrooks.jpg country/GarthBrooks.jpg
+(base) Summers-MacBook-Air:music-mashup summermcgrogan$ mv reggae/GarthBrooks/OhioPlayers.jpg funk/OhioPlayers.jpg
+(base) Summers-MacBook-Air:music-mashup summermcgrogan$ cp funk/OhioPlayers.jpg soul/OhioPlayers.jpg
+(base) Summers-MacBook-Air:music-mashup summermcgrogan$ mv reggae/Temptations/Beat65ToshCover.jpg reggae/Beat65ToshCover.jpg
+(base) Summers-MacBook-Air:music-mashup summermcgrogan$ mv rock/CardiB/JimmyCliff.jpg reggae/JimmyCliff.jpg
+(base) Summers-MacBook-Air:music-mashup summermcgrogan$ mv rock/EarthWindAndFire/Temptations.jpg soul/Temptations.jpg
+(base) Summers-MacBook-Air:music-mashup summermcgrogan$ cp soul/Temptations/jpg funk/Temptations.jpg
+cp: soul/Temptations/jpg: No such file or directory
+(base) Summers-MacBook-Air:music-mashup summermcgrogan$ cp soul/Temptations.jpg funk/Temptations.jpg
+(base) Summers-MacBook-Air:music-mashup summermcgrogan$ mv rock/PeterTosh/SmokeyRobinson.jpg soul/SmokeyRobinson.jpg
+(base) Summers-MacBook-Air:music-mashup summermcgrogan$ mv soul/DollyParton/EarthWindAndFire.jpg soul/EarthWindAndFire.jpg
+(base) Summers-MacBook-Air:music-mashup summermcgrogan$ cp soul/EarthWindAndFire.jpg funk/EarthWindAndFire.jpg
+(base) Summers-MacBook-Air:music-mashup summermcgrogan$ mv soul/JimmyCliff/aerosmith.jpg rock/Aerosmith/aerosmith.jpg
+mv: rename soul/JimmyCliff/aerosmith.jpg to rock/Aerosmith/aerosmith.jpg: No such file or directory
+(base) Summers-MacBook-Air:music-mashup summermcgrogan$ mv soul/JimmyCliff/aerosmith.jpg rock/aerosmith.jpg
+(base) Summers-MacBook-Air:music-mashup summermcgrogan$ mv soul/JuiceWrld/PatsyCline.jpg country/PatsyCline.jpg
+(base) Summers-MacBook-Air:music-mashup summermcgrogan$ mv country/NickiMinaj hip-hop-rap/NickiMinaj
+(base) Summers-MacBook-Air:music-mashup summermcgrogan$ mv country/BobMarley reggae/BobMarley
+(base) Summers-MacBook-Air:music-mashup summermcgrogan$ mv country/OhioPlayers funk/OhioPlayers
+(base) Summers-MacBook-Air:music-mashup summermcgrogan$ mv funk/AlanisMorissette rock/AlanisMorissette
+(base) Summers-MacBook-Air:music-mashup summermcgrogan$ mv funk/FourTops soul/FourTops
+(base) Summers-MacBook-Air:music-mashup summermcgrogan$ mv funk/GunsNRoses rock/GunsNRoses
+(base) Summers-MacBook-Air:music-mashup summermcgrogan$ mv funk/OhioPlayers soul/OhioPlayers
+(base) Summers-MacBook-Air:music-mashup summermcgrogan$ mv hip-hop-rap/Aerosmith rock/Aerosmith
+(base) Summers-MacBook-Air:music-mashup summermcgrogan$ mv hip-hop-rap/PatsyCline country/PatsyCline
+(base) Summers-MacBook-Air:music-mashup summermcgrogan$ mv hip-hop-rap/SmokeyRobinson soul/SmokeyRobinson
+(base) Summers-MacBook-Air:music-mashup summermcgrogan$ mv reggae/Funkadelic funk/Funkadelic
+(base) Summers-MacBook-Air:music-mashup summermcgrogan$ mv reggae/GarthBrooks country/GarthBrooks
+(base) Summers-MacBook-Air:music-mashup summermcgrogan$ mv reggae/Temptations soul/Temptations
+(base) Summers-MacBook-Air:music-mashup summermcgrogan$ mv rock/CardiB hip-hop-rap/CardiB
+(base) Summers-MacBook-Air:music-mashup summermcgrogan$ mv rock/EarthWindAndFire soul/EarthWindAndFire
+(base) Summers-MacBook-Air:music-mashup summermcgrogan$ cp soul/EarthWindAndFire funk/EarthWindAndFire
+cp: soul/EarthWindAndFire is a directory (not copied).
+(base) Summers-MacBook-Air:music-mashup summermcgrogan$ cp soul/EarthWindAndFire funk/EarthWindAndFire
+cp: soul/EarthWindAndFire is a directory (not copied).
+(base) Summers-MacBook-Air:music-mashup summermcgrogan$ mv rock/PeterTosh reggae/PeterTosh
+(base) Summers-MacBook-Air:music-mashup summermcgrogan$ mv soul/DollyParton country/DollyParton
+(base) Summers-MacBook-Air:music-mashup summermcgrogan$ mv soul/JimmyCliff reggae/JimmyCliff
+(base) Summers-MacBook-Air:music-mashup summermcgrogan$ mv soul/JuiceWrld hip-hop-rap/JuiceWrld
+(base) Summers-MacBook-Air:music-mashup summermcgrogan$ ls funk
+EarthWindAndFire.jpg	Funkadelic		Funkadelic.jpg		Temptations.jpg
+(base) Summers-MacBook-Air:music-mashup summermcgrogan$ ls funk
+EarthWindAndFire	Funkadelic		Temptations
+(base) Summers-MacBook-Air:music-mashup summermcgrogan$ ls soul
+EarthWindAndFire	FourTops		OhioPlayers		SmokeyRobinson		Temptations
+(base) Summers-MacBook-Air:music-mashup summermcgrogan$ dir
+-bash: dir: command not found
+(base) Summers-MacBook-Air:music-mashup summermcgrogan$ dir rock
+-bash: dir: command not found
+(base) Summers-MacBook-Air:music-mashup summermcgrogan$ 
