@@ -96,7 +96,7 @@ public class DiceSet {
    */
    public String toString() { //loop through everything and concatinate, create a new string stringResult = ""; inside for loop result += theSet.toString();
       for (int i = 0; i < theSet.length; i++){
-        return sConcat += theSet.toString();
+        return sConcat += theSet[i].toString();
       }
       return sConcat;
    }
