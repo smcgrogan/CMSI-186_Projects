@@ -1,5 +1,5 @@
 /** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
- *  File name     :  DiceSet.java
+ *  File name     :  HighRoll.java
  *  Purpose       :  Provides a class describing a set of dice
  *  Author        :  Summer McGrogan
  *  Date          :  02.02.2020
