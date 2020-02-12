@@ -61,7 +61,7 @@ public class Die {
    * Class-wide method that returns a String representation of THIS die instance
    * @return String representation of this Die
    */
-   public static String toString( Die d) { //is this what this is supposed to do?
+   public static String toString( Die d) { 
       return d.toString();
    }
 
