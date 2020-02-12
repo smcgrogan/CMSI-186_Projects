@@ -16,12 +16,12 @@
         int sides = Integer.parseInt(args [1]);
         int highScore = 0;
         DiceSet dSet = new DiceSet(count, sides);
-        System.out.print( "Option 1 : ROLL ALL THE DICE \nOption 2 : ROLL A SINGLE DIE \nOption 3 : CALCULATE THE SCORE FOR THIS SET \nOption 4 : SAVE THIS SCORE AS HIGH SCORE \nOption 5 : DISPLAY THE HIGH SCORE \nOption 6 : ENTER 'Q' TO QUIT THE PROGRAM" ); //prompt gets changed to options
+        System.out.print( "Option 1 : ROLL ALL THE DICE \nOption 2 : ROLL A SINGLE DIE \nOption 3 : CALCULATE THE SCORE FOR THIS SET \nOption 4 : SAVE THIS SCORE AS HIGH SCORE \nOption 5 : DISPLAY THE HIGH SCORE \nOption 6 : ENTER 'Q' TO QUIT THE PROGRAM\n" ); //prompt gets changed to options
         // This line uses the two classes to assemble an "input stream" for the user to type
         // text into the program
          BufferedReader input = new BufferedReader( new InputStreamReader( System.in ) ); //allows you to read the input
          while( true ) {
-            System.out.print("start here: ");
+            System.out.println("start here: ");
             String inputLine = null;
             try {
                inputLine = input.readLine();
@@ -29,8 +29,6 @@
                   System.out.println("enter some text!:");
                   continue;
                }
-               System.out.println( "   You typed: " + inputLine );
-
                if( 'q' == inputLine.charAt(0) ) { //if this is 1, call dice.rollAll, if rollIndivid, as which one (add another read and add a parseInt to get the value)
                   break;
                }
