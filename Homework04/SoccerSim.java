@@ -37,7 +37,7 @@ public class SoccerSim{
         if(args.length % 4 == 0){
            timeSlice = 1.00;
         }
-        if ((Double.parseDouble(args[args.length-1]) > 1800.00) || ((Double.parseDouble(args[args.length-1])) <= 0)){
+        else if ((Double.parseDouble(args[args.length-1]) > 1800.00) || ((Double.parseDouble(args[args.length-1])) <= 0)){
            throw new IllegalArgumentException(" TimsSlice must be between 0 and 1800 seconds!!!");
         }
         else{
@@ -74,7 +74,7 @@ public class SoccerSim{
         return false;
      }
 
-     private static boolean ballhit(){ //checks if ball was hit
+     private static boolean ballhit(){
         for (int i = 0; i < (numballs - 1); i++){
            for (int j = (i + 1); j < numballs; j++){
               double[] locationA = ball[i].getCurrentPosition();
@@ -93,11 +93,12 @@ public class SoccerSim{
      public static void main (String[] args){
         countballs(args);
         checkslice(args);
+        System.out.println("TimeSlice is: " + timeSlice);
         makeBalls(args);
         while(true){
            polehit();
            ballhit();
-           time += timeSlice;
+           time+=timeSlice;
            for (var b : ball){
              b.move(timeSlice);
              b.updateSpeedsForOneTick(timeSlice);
@@ -117,19 +118,13 @@ public class SoccerSim{
               seconds = minutes%60;
               System.out.println("TIME: <" + hours + ":" + minutes + ":" + seconds + ">");
            }
-           if (polehit()){
-              System.out.println("TIME: <" + hours + ":" + minutes + ":" + seconds + ">");
-              System.exit(0);
-           }
-           if (ballhit()){
-              System.out.println("TIME: <" + hours + ":" + minutes + ":" + seconds + ">");
-              System.exit(0);
-           }
+           System.out.println("checks if ball is still moving");
            for (var b: ball){
               if (!b.isStillMoving()){
                  b.setBallOutOfBounds(1000,1000);
               }
            }
+           System.out.println("Stops before velocity ball thing");
            for ( var b: ball){
               double[] location = b.getCurrentPosition();
               double[] velocity = b.getCurrentSpeed();
@@ -140,10 +135,21 @@ public class SoccerSim{
                 OOBcount++;
               }
            }
+           System.out.println("Stops before OOBCounter");
            if (OOBcount == numballs){
               System.out.println("All balls have stopped moving. Sim has ended.");
-              System.exit(0);
+              break;
            }
+           else if (polehit()){
+              System.out.println("TIME: <" + hours + ":" + minutes + ":" + seconds + ">");
+              break;
+           }
+           else if (ballhit()){
+              System.out.println("TIME: <" + hours + ":" + minutes + ":" + seconds + ">");
+              System.out.println("BALL WAS HIT! I REPEAT, BALL WAS HIT!!!");
+              break;
+           }
+           time += timeSlice;
         }
      }
 }
