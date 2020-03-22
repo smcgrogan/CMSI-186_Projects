@@ -74,14 +74,14 @@ public class SkateRamp{
          coefficients = new double[args.length-4];
          for (int i = 1; i < args.length-3; i++){
             coefficients[i-1] += Double.parseDouble(args[i]);
-            System.out.println("Coef at position: " + (i-1) + " is: " + coefficients[i]);
+            System.out.println("Coef at position: " + (i-1) + " is: " + coefficients[i-1]);
          }
       }
       else{
           coefficients = new double[args.length-3];
           for (int i = 1; i < args.length-2; i++){
             coefficients[i-1] += Double.parseDouble(args[i]);
-            System.out.println("Coef at position: " + (i-1) + "is: " + coefficients[i]);
+            System.out.println("Coef at position: " + (i-1) + "is: " + coefficients[i-1]);
           }
       }
    }
