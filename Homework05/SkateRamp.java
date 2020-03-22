@@ -72,12 +72,14 @@ public class SkateRamp{
    public static void createCoef(String[] args){
       if (checkpercent(args)){
          for (int i = 1; i < args.length-3; i++){
+            coefficients = new double[args.length-4];
             coefficients[i-1] += Double.parseDouble(args[i]);
-            System.out.println("Coef at position: " + (i-1) + "is: " + coefficients[i]);
+            System.out.println("Coef at position: " + (i-1) + " is: " + coefficients[i]);
          }
       }
       else{
           for (int i = 1; i < args.length-2; i++){
+            coefficients = new double[args.length-3];
             coefficients[i-1] += Double.parseDouble(args[i]);
             System.out.println("Coef at position: " + (i-1) + "is: " + coefficients[i]);
           }
