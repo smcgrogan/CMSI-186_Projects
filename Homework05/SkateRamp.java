@@ -176,9 +176,9 @@ public class SkateRamp{
       for (int j = 0; j < n; j++){
          yValue = 0.0;
          midpt = lower + (width / 2.0) + (j * width);
-         yValue = calculateY(coefficients, midpt);
-         System.out.println("Midpoint is: " + midpt + "\n Height is: " + yValue);
-         sum += Math.sin(yValue / Math.sqrt(Math.pow(yValue, 2) + Math.pow(width, 2)));
+         yValue = Math.sin((coefficients[1] * midpt) + coefficients[0]);
+         System.out.println("Width is: " + width + "\n Height is: " + yValue);
+         sum += yValue * width;
       }
       System.out.println("Area total is: " + sum);
       return sum;
@@ -192,9 +192,9 @@ public class SkateRamp{
       for (int j = 0; j < n; j++){
          yValue = 0.0;
          midpt = lower + (width / 2.0) + (j * width);
-         yValue = calculateY(coefficients, midpt);
+         yValue = Math.cos((coefficients[1] * midpt) + coefficients[0]);
          System.out.println("Midpoint is: " + midpt + "\n Height is: " + yValue);
-         sum += Math.cos(width / Math.sqrt(Math.pow(yValue, 2) + Math.pow(width, 2)));
+         sum += width * yValue;
       }
       System.out.println("Area total is: " + sum);
       return sum;
@@ -208,9 +208,9 @@ public class SkateRamp{
       for (int j = 0; j < n; j++){
          yValue = 0.0;
          midpt = lower + (width / 2.0) + (j * width);
-         yValue = calculateY(coefficients, midpt);
+         yValue = Math.tan((coefficients[1] * midpt) + coefficients[0]);
          System.out.println("Midpoint is: " + midpt + "\n Height is: " + yValue);
-         sum += Math.tan(yValue / width);
+         sum += yValue * width;
       }
       System.out.println("Area total is: " + sum);
       return sum;
@@ -240,7 +240,7 @@ public class SkateRamp{
      System.out.println("Answer should be -0.1834 \n");
    }
 
-   public void testTan(){
+   public void testTan(){ //error with calculations for this
      System.out.println("Testing tan function:");
      String[] testargs = {"tan", "0.0", "1.0", "-0.5", "1.25", "1.5e-4%"};
      double[] testcoef = {0.0, 1.0};
