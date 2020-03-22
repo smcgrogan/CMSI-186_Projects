@@ -90,9 +90,12 @@ public class SkateRamp{
       double power = coefficients.length-1;
       double y = 0.0;
       double yValue = 0.0;
-      for (int i = 0; i <= coefficients.length; i++){
-         y = coefficients[i] * Math.pow(midpt, power);
+      for (int i = 1; i <= coefficients.length; i++){
+         System.out.println("Midpt is: " + midpt + " power is: " + power);
+         y = coefficients[i-1] * Math.pow(midpt, power);
+         System.out.println("y is: " + y + ", coef is: " + coefficients[i-1]);
          yValue += y;
+         power = power-1;
       }
       return yValue;
    }
@@ -235,12 +238,12 @@ public class SkateRamp{
       return areaTotal;
     }
 
-   public void testPoly(){
+   public void testPoly(){ //need to fix this!!!!!!
       System.out.println("Testing poly function:");
       String[] testargs = {"poly", "0.0", "8.0", "-2.0", "1.0", "4.0", "1.0%"};
-      checkpercent(testargs);
-      checkinput(testargs);
-      System.out.println("Test result for 10 rectangles is: " + poly(10, testargs, coefficients));
+      double[] testcoef = {0.0, 8.0, -2.0};
+      //createCoef(testargs);
+      System.out.println("Test result for 10 rectangles is: " + poly(10, testargs, testcoef));
       System.out.println("Answer should be about 15.000 \n");
    }
 
@@ -250,12 +253,15 @@ public class SkateRamp{
 
    public static void main (String[] args) {
       SkateRamp sr = new SkateRamp();
+      if (args[0].equals("runMyTests")){
+         sr.runMyTests();
+         System.exit(0);
+      }
       sr.checkpercent(args);
       sr.checkfunc(args);
       sr.checkinput(args);
       sr.createCoef(args);
       int n = 2;
-      // only run this if they ask you too sr.runMyTests();
       if (sr.checkpercent(args)){
          sr.lower = Double.parseDouble(args[args.length-3]);
          sr.upper = Double.parseDouble(args[args.length-2]);
