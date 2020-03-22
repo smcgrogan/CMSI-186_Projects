@@ -86,16 +86,22 @@ public class SkateRamp{
       }
    }
 
-   public double calculateY(double[] coefficients, double midpt){
-      double power = coefficients.length-1;
-      double y = 0.0;
+   //public double calculateY(String[] args, double[] coefficients, double midpt){
+      //double power = coefficients.length-1;
+      //double y = 0.0;
+      //double yValue = 0.0;
+      //for (int i = 1; i <= coefficients.length; i++){
+      //    System.out.println("Midpt is: " + midpt + " power is: " + power);
+      //    y = coefficients[i-1] * Math.pow(midpt, power);
+      //    System.out.println("y is: " + y + ", coef is: " + coefficients[i-1]);
+      //    yValue += y;
+      //    power = power-1;
+      //}
+      //return yValue;
+   public double calculateY( double[] coefficients, double midPoint ) {
       double yValue = 0.0;
-      for (int i = 1; i <= coefficients.length; i++){
-         System.out.println("Midpt is: " + midpt + " power is: " + power);
-         y = coefficients[i-1] * Math.pow(midpt, power);
-         System.out.println("y is: " + y + ", coef is: " + coefficients[i-1]);
-         yValue += y;
-         power = power-1;
+      for( int i = 0; i < coefficients.length; i++ ) {
+         yValue += coefficients[i] * Math.pow( midPoint, i );
       }
       return yValue;
    }
@@ -109,8 +115,10 @@ public class SkateRamp{
          yValue = 0.0;
          midpt = lower + (width / 2.0) + (j * width);
          yValue = calculateY(coefficients, midpt);
+         System.out.println("Midpoint is: " + midpt + "\n Height is: " + yValue);
          sum += yValue * width;
       }
+      System.out.println("Total area is: " + sum);
       return sum;
       //double chunkWidth = (upper - lower)/n;
       //double midVal = (upper + (((lower - upper)/n)/2) );
@@ -160,100 +168,96 @@ public class SkateRamp{
       //return areaTotal;
    }
 
-    public double sin(int n, String[] args){
-      double chunkWidth = (upper-lower)/n;
-      double midVal = (upper +(((lower - upper)/n)/2));
-      double height = 0.0;
-      double areaTotal = 0.0;
-      double lastArea = 0.0;
-      double currentArea = 0.0;
-      if (checkpercent(args)){ //DOES THIS ACTUALLY MAKE A DIFFERENCE (CHECK FOR SIN COS AND TAN)
-         for (int i = 0; i < n; i++){
-            height = Math.sin(midVal);
-            areaTotal = chunkWidth * height;
-            midVal += chunkWidth;
-            currentArea += areaTotal;
-         }
+    public double sin(int n, String[] args, double[] coefficients){
+      double midpt  = 0.0;
+      double sum    = 0.0;
+      double width  = ((upper - lower) / n);
+      double yValue = 0.0;
+      for (int j = 0; j < n; j++){
+         yValue = 0.0;
+         midpt = lower + (width / 2.0) + (j * width);
+         yValue = calculateY(coefficients, midpt);
+         System.out.println("Midpoint is: " + midpt + "\n Height is: " + yValue);
+         sum += Math.sin(yValue / Math.sqrt(Math.pow(yValue, 2) + Math.pow(width, 2)));
       }
-      else{
-        for (int i = 0; i < n; i++){
-           height = Math.sin(midVal);
-           areaTotal = chunkWidth * height;
-           midVal += chunkWidth;
-           currentArea += areaTotal;
-         }
-      }
-      return areaTotal;
+      System.out.println("Area total is: " + sum);
+      return sum;
     }
 
-    public double cos(int n, String[] args){
-      double chunkWidth = (upper-lower)/n;
-      double midVal = (upper +(((lower - upper)/n)/2));
-      double height = 0.0;
-      double areaTotal = 0.0;
-      double lastArea = 0.0;
-      double currentArea = 0.0;
-      if (checkpercent(args)){
-         for (int i = 0; i < n; i++){
-            height = Math.cos(midVal);
-            areaTotal = chunkWidth * height;
-            midVal += chunkWidth;
-            currentArea += areaTotal;
-         }
+    public double cos(int n, String[] args, double[] coefficients){
+      double midpt  = 0.0;
+      double sum    = 0.0;
+      double width  = ((upper - lower) / n);
+      double yValue = 0.0;
+      for (int j = 0; j < n; j++){
+         yValue = 0.0;
+         midpt = lower + (width / 2.0) + (j * width);
+         yValue = calculateY(coefficients, midpt);
+         System.out.println("Midpoint is: " + midpt + "\n Height is: " + yValue);
+         sum += Math.cos(width / Math.sqrt(Math.pow(yValue, 2) + Math.pow(width, 2)));
       }
-      else{
-        for (int i = 0; i < n; i++){
-           height = Math.cos(midVal);
-           areaTotal = chunkWidth * height;
-           midVal += chunkWidth;
-           currentArea += areaTotal;
-         }
-      }
-      return areaTotal;
+      System.out.println("Area total is: " + sum);
+      return sum;
     }
 
-    public double tan(int n, String[] args){
-      double chunkWidth = (upper-lower)/n;
-      double midVal = (upper +(((lower - upper)/n)/2));
-      double height = 0.0;
-      double areaTotal = 0.0;
-      double lastArea = 0.0;
-      double currentArea = 0.0;
-      if (checkpercent(args)){
-         for (int i = 0; i < n; i++){
-            height = Math.tan(midVal);
-            areaTotal = chunkWidth * height;
-            midVal += chunkWidth;
-            currentArea += areaTotal;
-         }
+    public double tan(int n, String[] args, double[] coefficients){
+      double midpt  = 0.0;
+      double sum    = 0.0;
+      double width  = ((upper - lower) / n);
+      double yValue = 0.0;
+      for (int j = 0; j < n; j++){
+         yValue = 0.0;
+         midpt = lower + (width / 2.0) + (j * width);
+         yValue = calculateY(coefficients, midpt);
+         System.out.println("Midpoint is: " + midpt + "\n Height is: " + yValue);
+         sum += Math.tan(yValue / width);
       }
-      else{
-        for (int i = 0; i < n; i++){
-           height = Math.tan(midVal);
-           areaTotal = chunkWidth * height;
-           midVal += chunkWidth;
-           currentArea += areaTotal;
-         }
-      }
-      return areaTotal;
+      System.out.println("Area total is: " + sum);
+      return sum;
     }
 
-   public void testPoly(){ //need to fix this!!!!!!
+   public void testPoly(){
       System.out.println("Testing poly function:");
       String[] testargs = {"poly", "0.0", "8.0", "-2.0", "1.0", "4.0", "1.0%"};
       double[] testcoef = {0.0, 8.0, -2.0};
-      //createCoef(testargs);
       System.out.println("Test result for 10 rectangles is: " + poly(10, testargs, testcoef));
       System.out.println("Answer should be about 15.000 \n");
    }
 
+   public void testSin(){
+     System.out.println("Testing sin function:");
+     String[] testargs = {"sin", "-17.0", "3.0", "-11.0", "11.0", "1e-7%"};
+     double[] testcoef = {-17.0, 3.0};
+     System.out.println("Test result for 10 rectangles is: " + sin(10, testargs, testcoef));
+     System.out.println("Answer should be 0.6409 \n");
+   }
+
+   public void testCos(){
+     System.out.println("Testing cos function:");
+     String[] testargs = {"sin", "-17.0", "3.0", "-11.0", "11.0", "1e-7%"};
+     double[] testcoef = {-17.0, 3.0};
+     System.out.println("Test result for 10 rectangles is: " + cos(10, testargs, testcoef));
+     System.out.println("Answer should be -0.1834 \n");
+   }
+
+   public void testTan(){
+     System.out.println("Testing tan function:");
+     String[] testargs = {"tan", "0.0", "1.0", "-0.5", "1.25", "1.5e-4%"};
+     double[] testcoef = {0.0, 1.0};
+     System.out.println("Test result for 10 rectangles is: " + tan(10, testargs, testcoef));
+     System.out.println("Answer should be 1.0235 \n");
+   }
+
    public void runMyTests(){
       testPoly();
+      testSin();
+      testCos();
+      testTan();
    }
 
    public static void main (String[] args) {
       SkateRamp sr = new SkateRamp();
-      if (args[0].equals("runMyTests")){
+      if (args[0].equals("runMyTests") || args[0].equals("runmytests")){
          sr.runMyTests();
          System.exit(0);
       }
@@ -283,19 +287,19 @@ public class SkateRamp{
          }
       }
       if (args[0].equals("sin")){
-         sr.sin(n, args);
+         sr.sin(n, args, coefficients);
          if ((((sr.currentArea - sr.lastArea)/sr.lastArea)*100) <= sr.percent){
              System.exit(0);
          }
       }
       if (args[0].equals("cos")){
-         sr.cos(n, args);
+         sr.cos(n, args, coefficients);
          if ((((sr.currentArea - sr.lastArea)/sr.lastArea)*100) <= sr.percent){
              System.exit(0);
          }
       }
       if (args[0].equals("tan")){
-         sr.tan(n, args);
+         sr.tan(n, args, coefficients);
          if ((((sr.currentArea - sr.lastArea)/sr.lastArea)*100) <= sr.percent){
              System.exit(0);
          }
