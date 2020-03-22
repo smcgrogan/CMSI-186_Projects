@@ -98,13 +98,13 @@ public class SkateRamp{
       //    power = power-1;
       //}
       //return yValue;
-   public double calculateY( double[] coefficients, double midPoint ) {
-      double yValue = 0.0;
-      for( int i = 0; i < coefficients.length; i++ ) {
-         yValue += coefficients[i] * Math.pow( midPoint, i );
+      public double calculateY( double[] coefficients, double midPoint ) {
+         double yValue = 0.0;
+         for( int i = 0; i < coefficients.length; i++ ) {
+            yValue += coefficients[i] * Math.pow( midPoint, i );
+         }
+         return yValue;
       }
-      return yValue;
-   }
 
    public double poly(int n, String[] args, double[] coefficients){
       double midpt  = 0.0;
@@ -115,7 +115,6 @@ public class SkateRamp{
          yValue = 0.0;
          midpt = lower + (width / 2.0) + (j * width);
          yValue = calculateY(coefficients, midpt);
-         System.out.println("Midpoint is: " + midpt + "\n Height is: " + yValue);
          sum += yValue * width;
       }
       System.out.println("Total area is: " + sum);
@@ -176,9 +175,8 @@ public class SkateRamp{
       for (int j = 0; j < n; j++){
          yValue = 0.0;
          midpt = lower + (width / 2.0) + (j * width);
-         yValue = Math.sin((coefficients[1] * midpt) + coefficients[0]);
-         System.out.println("Width is: " + width + "\n Height is: " + yValue);
-         sum += yValue * width;
+         yValue = calculateY(coefficients, midpt);
+         sum += width * Math.sin(yValue);
       }
       System.out.println("Area total is: " + sum);
       return sum;
@@ -192,9 +190,8 @@ public class SkateRamp{
       for (int j = 0; j < n; j++){
          yValue = 0.0;
          midpt = lower + (width / 2.0) + (j * width);
-         yValue = Math.cos((coefficients[1] * midpt) + coefficients[0]);
-         System.out.println("Midpoint is: " + midpt + "\n Height is: " + yValue);
-         sum += width * yValue;
+         yValue = calculateY(coefficients, midpt);
+         sum += width * Math.cos(yValue);
       }
       System.out.println("Area total is: " + sum);
       return sum;
@@ -208,9 +205,8 @@ public class SkateRamp{
       for (int j = 0; j < n; j++){
          yValue = 0.0;
          midpt = lower + (width / 2.0) + (j * width);
-         yValue = Math.tan((coefficients[1] * midpt) + coefficients[0]);
-         System.out.println("Midpoint is: " + midpt + "\n Height is: " + yValue);
-         sum += yValue * width;
+         yValue = calculateY(coefficients, midpt);
+         sum += (Math.tan(yValue)) * width;
       }
       System.out.println("Area total is: " + sum);
       return sum;
