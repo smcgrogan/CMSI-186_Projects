@@ -94,7 +94,7 @@ public class SkateRamp{
        return yValue;
    }
 
-   public double poly(int n, String[] args, double[] coefficients){
+   public double poly(int n, String[] args, double[] coefficients, double upper, double lower){
       double midpt  = 0.0;
       double currentArea = 0.0;
       double width  = ((upper - lower) / n);
@@ -112,7 +112,7 @@ public class SkateRamp{
       return currentArea;
    }
 
-    public double sin(int n, String[] args, double[] coefficients){
+    public double sin(int n, String[] args, double[] coefficients, double upper, double lower){
       double midpt  = 0.0;
       double currentArea = 0.0;
       double width  = ((upper - lower) / n);
@@ -128,7 +128,7 @@ public class SkateRamp{
       return currentArea;
     }
 
-    public double cos(int n, String[] args, double[] coefficients){
+    public double cos(int n, String[] args, double[] coefficients, double upper, double lower){
       double midpt  = 0.0;
       double currentArea = 0.0;
       double width  = ((upper - lower) / n);
@@ -144,7 +144,7 @@ public class SkateRamp{
       return currentArea;
     }
 
-    public double tan(int n, String[] args, double[] coefficients){
+    public double tan(int n, String[] args, double[] coefficients, double upper, double lower){
       double midpt  = 0.0;
       double currentArea = 0.0;
       double width  = ((upper - lower) / n);
@@ -164,11 +164,13 @@ public class SkateRamp{
       System.out.println("Testing poly function:");
       String[] testargs = {"poly", "0.0", "8.0", "-2.0", "1.0", "4.0", "1.0%"};
       double[] testcoef = {0.0, 8.0, -2.0};
+      double tupper = 4.0;
+      double tlower = 1.0;
       checkpercent(testargs);
       checkinput(testargs);
       checkfunc(testargs);
       createCoef(testargs);
-      System.out.println("Test result for 10 rectangles is: " + poly(10, testargs, testcoef));
+      System.out.println("Test result for 10 rectangles is: " + poly(10, testargs, testcoef, tupper, tlower));
       System.out.println("Answer should be about 15.000 \n");
    }
 
@@ -176,23 +178,41 @@ public class SkateRamp{
      System.out.println("Testing sin function:");
      String[] testargs = {"sin", "-17.0", "3.0", "-11.0", "11.0", "1e-7%"};
      double[] testcoef = {-17.0, 3.0};
-     System.out.println("Test result for 10 rectangles is: " + sin(10, testargs, testcoef));
+     double tupper = 11.0;
+     double tlower = -11.0;
+     checkpercent(testargs);
+     checkinput(testargs);
+     checkfunc(testargs);
+     createCoef(testargs);
+     System.out.println("Test result for 10 rectangles is: " + sin(10, testargs, testcoef, tupper, tlower));
      System.out.println("Answer should be 0.6409 \n");
    }
 
    public void testCos(){
      System.out.println("Testing cos function:");
-     String[] testargs = {"sin", "-17.0", "3.0", "-11.0", "11.0", "1e-7%"};
+     String[] testargs = {"cos", "-17.0", "3.0", "-11.0", "11.0", "1e-7%"};
      double[] testcoef = {-17.0, 3.0};
-     System.out.println("Test result for 10 rectangles is: " + cos(10, testargs, testcoef));
+     double tupper = 11.0;
+     double tlower = -11.0;
+     checkpercent(testargs);
+     checkinput(testargs);
+     checkfunc(testargs);
+     createCoef(testargs);
+     System.out.println("Test result for 10 rectangles is: " + cos(10, testargs, testcoef, tupper, tlower));
      System.out.println("Answer should be -0.1834 \n");
    }
 
-   public void testTan(){ //error with calculations for this
+   public void testTan(){
      System.out.println("Testing tan function:");
      String[] testargs = {"tan", "0.0", "1.0", "-0.5", "1.25", "1.5e-4%"};
      double[] testcoef = {0.0, 1.0};
-     System.out.println("Test result for 10 rectangles is: " + tan(10, testargs, testcoef));
+     double tupper = -0.5;
+     double tlower = 1.25;
+     checkpercent(testargs);
+     checkinput(testargs);
+     checkfunc(testargs);
+     createCoef(testargs);
+     System.out.println("Test result for 10 rectangles is: " + tan(10, testargs, testcoef, tupper, tlower));
      System.out.println("Answer should be 1.0235 \n");
    }
 
@@ -230,25 +250,25 @@ public class SkateRamp{
          System.exit(0);
       }
       if (args[0].equals("poly")){
-         sr.poly(n, args, coefficients);
+         sr.poly(n, args, coefficients, sr.upper, sr.lower);
          if ((((sr.currentArea - sr.lastArea)/sr.lastArea)*100) <= sr.percent){
              System.exit(0);
          }
       }
       if (args[0].equals("sin")){
-         sr.sin(n, args, coefficients);
+         sr.sin(n, args, coefficients, sr.upper, sr.lower);
          if ((((sr.currentArea - sr.lastArea)/sr.lastArea)*100) <= sr.percent){
              System.exit(0);
          }
       }
       if (args[0].equals("cos")){
-         sr.cos(n, args, coefficients);
+         sr.cos(n, args, coefficients, sr.upper, sr.lower);
          if ((((sr.currentArea - sr.lastArea)/sr.lastArea)*100) <= sr.percent){
              System.exit(0);
          }
       }
       if (args[0].equals("tan")){
-         sr.tan(n, args, coefficients);
+         sr.tan(n, args, coefficients, sr.upper, sr.lower);
          if ((((sr.currentArea - sr.lastArea)/sr.lastArea)*100) <= sr.percent){
              System.exit(0);
          }
