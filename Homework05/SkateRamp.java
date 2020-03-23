@@ -2,7 +2,7 @@
  *  File name     :  SkateRamp.java
  *  Purpose       :  Finds area under curve of skate ramp given functions
  *  @author       :  Summer McGrogan
- *  Date written  :  03-20-2020
+ *  Date written  :  03-22-2020
 * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 import java.lang.Math;
 import java.lang.IllegalArgumentException;
@@ -47,7 +47,7 @@ public class SkateRamp{
         }
       }
       else{
-         if ((args.length) < 5){
+         if ((args.length) < 4){
             System.out.println("You did not include enough arguments!");
             useMethod();
             System.exit(0);
@@ -81,30 +81,18 @@ public class SkateRamp{
           coefficients = new double[args.length-3];
           for (int i = 1; i < args.length-2; i++){
             coefficients[i-1] += Double.parseDouble(args[i]);
-            System.out.println("Coef at position: " + (i-1) + "is: " + coefficients[i-1]);
+            System.out.println("Coef at position: " + (i-1) + " is: " + coefficients[i-1]);
           }
       }
    }
 
-   //public double calculateY(String[] args, double[] coefficients, double midpt){
-      //double power = coefficients.length-1;
-      //double y = 0.0;
-      //double yValue = 0.0;
-      //for (int i = 1; i <= coefficients.length; i++){
-      //    System.out.println("Midpt is: " + midpt + " power is: " + power);
-      //    y = coefficients[i-1] * Math.pow(midpt, power);
-      //    System.out.println("y is: " + y + ", coef is: " + coefficients[i-1]);
-      //    yValue += y;
-      //    power = power-1;
-      //}
-      //return yValue;
-      public double calculateY( double[] coefficients, double midPoint ) {
-         double yValue = 0.0;
-         for( int i = 0; i < coefficients.length; i++ ) {
-            yValue += coefficients[i] * Math.pow( midPoint, i );
-         }
-         return yValue;
-      }
+   public double calculateY( double[] coefficients, double midPoint ) {
+       double yValue = 0.0;
+       for( int i = 0; i < coefficients.length; i++ ) {
+         yValue += coefficients[i] * Math.pow( midPoint, i );
+       }
+       return yValue;
+   }
 
    public double poly(int n, String[] args, double[] coefficients){
       double midpt  = 0.0;
@@ -113,58 +101,12 @@ public class SkateRamp{
       double yValue = 0.0;
       for( int j = 0; j < n; j++ ) {
          yValue = 0.0;
-         midpt = lower + (width / 2.0) + (j * width);
-         yValue = calculateY(coefficients, midpt);
-         sum += yValue * width;
+      midpt = lower + (width / 2.0) + (j * width);
+      yValue = calculateY(coefficients, midpt);
+      sum += yValue * width;
       }
       System.out.println("Total area is: " + sum);
       return sum;
-      //double chunkWidth = (upper - lower)/n;
-      //double midVal = (upper + (((lower - upper)/n)/2) );
-      //double height = 0.0;
-      //double areaTotal = 0.0;
-      //double lastArea = 0.0;
-      //double currentArea = 0.0;
-      //double currentHeight = 0.0;
-      //if (args[args.length-1].contains("%")){
-      //   int power = args.length-5;
-      //   for (int i = 0; i < n; i++){
-      //      lastArea = currentArea;
-      //      for (int j = 1; j < (args.length - 3); j++){
-      //         if (Double.parseDouble(args[j]) == 0.0){
-      //            height = 0.0;
-      //         }
-      //         else{
-      //           height = Double.parseDouble(args[j]) * Math.pow(Double.parseDouble(args[j]), power);
-      //         }
-      //         power--;
-      //         System.out.println("Height inside loop is: " + height);
-      //         currentHeight += height;
-      //      }
-      //      areaTotal += currentHeight*chunkWidth*n;
-      //      currentArea += areaTotal;
-      //      System.out.println("Height and Width outside loop is: " + height + "\n Width: " + chunkWidth);
-      //      System.out.println("Area total is: " + areaTotal);
-      //   }
-
-      //}
-      //else{
-      //  for (int i = 0; i < n; i++){
-      //     int power = args.length-4;
-      //     for (int j = 1; j < (args.length - 2); j++){
-      //        height = Double.parseDouble(args[args.length - j]) * Math.pow(chunkWidth, j);
-      //        power--;
-      //        System.out.println("Height inside loop is: " + height);
-      //        currentHeight += height;
-      //     }
-      //     areaTotal += currentHeight*chunkWidth*n;
-           //midVal += chunkWidth;
-      //     currentArea += areaTotal;
-      //     System.out.println("Height is: " + height + "\n Width is: " +chunkWidth);
-      //     System.out.println("Area total is: " + areaTotal);
-      //  }
-      //}
-      //return areaTotal;
    }
 
     public double sin(int n, String[] args, double[] coefficients){
@@ -269,11 +211,12 @@ public class SkateRamp{
       }
       else {
          sr.lower = Double.parseDouble(args[args.length-2]);
-         sr.upper = Double.parseDouble(args[args.length-3]);
+         sr.upper = Double.parseDouble(args[args.length-1]);
          System.out.println("Input does not contain percent. Auto-percent is 1.00%");
       }
       if (sr.upper < sr.lower){
          sr.useMethod();
+         System.out.println("Upper limit cannot be greater than lower");
          System.exit(0);
       }
       if (args[0].equals("poly")){
