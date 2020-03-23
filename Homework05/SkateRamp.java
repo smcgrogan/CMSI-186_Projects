@@ -96,68 +96,78 @@ public class SkateRamp{
 
    public double poly(int n, String[] args, double[] coefficients){
       double midpt  = 0.0;
-      double sum    = 0.0;
+      double currentArea = 0.0;
       double width  = ((upper - lower) / n);
       double yValue = 0.0;
+      double lastArea = 0.0;
       for( int j = 0; j < n; j++ ) {
          yValue = 0.0;
-      midpt = lower + (width / 2.0) + (j * width);
-      yValue = calculateY(coefficients, midpt);
-      sum += yValue * width;
+         midpt = lower + (width / 2.0) + (j * width);
+         yValue = calculateY(coefficients, midpt);
+         currentArea += yValue * width;
+         System.out.println("yVal: " + yValue + " width is: " + width);
       }
-      System.out.println("Total area is: " + sum);
-      return sum;
+      System.out.println("Total area is: " + currentArea);
+      lastArea = currentArea;
+      return currentArea;
    }
 
     public double sin(int n, String[] args, double[] coefficients){
       double midpt  = 0.0;
-      double sum    = 0.0;
+      double currentArea = 0.0;
       double width  = ((upper - lower) / n);
       double yValue = 0.0;
       for (int j = 0; j < n; j++){
          yValue = 0.0;
          midpt = lower + (width / 2.0) + (j * width);
          yValue = calculateY(coefficients, midpt);
-         sum += width * Math.sin(yValue);
+         currentArea += width * Math.sin(yValue);
+         lastArea = currentArea;
       }
-      System.out.println("Area total is: " + sum);
-      return sum;
+      System.out.println("Area total is: " + currentArea);
+      return currentArea;
     }
 
     public double cos(int n, String[] args, double[] coefficients){
       double midpt  = 0.0;
-      double sum    = 0.0;
+      double currentArea = 0.0;
       double width  = ((upper - lower) / n);
       double yValue = 0.0;
       for (int j = 0; j < n; j++){
          yValue = 0.0;
          midpt = lower + (width / 2.0) + (j * width);
          yValue = calculateY(coefficients, midpt);
-         sum += width * Math.cos(yValue);
+         currentArea += width * Math.cos(yValue);
       }
-      System.out.println("Area total is: " + sum);
-      return sum;
+      System.out.println("Area total is: " + currentArea);
+      lastArea = currentArea;
+      return currentArea;
     }
 
     public double tan(int n, String[] args, double[] coefficients){
       double midpt  = 0.0;
-      double sum    = 0.0;
+      double currentArea = 0.0;
       double width  = ((upper - lower) / n);
       double yValue = 0.0;
       for (int j = 0; j < n; j++){
          yValue = 0.0;
          midpt = lower + (width / 2.0) + (j * width);
          yValue = calculateY(coefficients, midpt);
-         sum += (Math.tan(yValue)) * width;
+         currentArea += (Math.tan(yValue)) * width;
       }
-      System.out.println("Area total is: " + sum);
-      return sum;
+      System.out.println("Area total is: " + currentArea);
+      lastArea = currentArea;
+      return currentArea;
     }
 
    public void testPoly(){
       System.out.println("Testing poly function:");
       String[] testargs = {"poly", "0.0", "8.0", "-2.0", "1.0", "4.0", "1.0%"};
       double[] testcoef = {0.0, 8.0, -2.0};
+      checkpercent(testargs);
+      checkinput(testargs);
+      checkfunc(testargs);
+      createCoef(testargs);
       System.out.println("Test result for 10 rectangles is: " + poly(10, testargs, testcoef));
       System.out.println("Answer should be about 15.000 \n");
    }
