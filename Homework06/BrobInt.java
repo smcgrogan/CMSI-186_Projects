@@ -91,12 +91,13 @@ public class BrobInt {
    *  NOTE: you can use this or not, as you see fit; explanation was given in class
    *  @see StringBuffer API page for an easy way to do this
    *  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
-   public BrobInt reverse() {
+   public BrobInt reverser() {
       for (int i = (internalValue.length()-1); i >= 0; i--){
          char c = internalValue.charAt(i);
          reversed+=c;
       }
       System.out.println("Your reversed string is: " + reversed);
+      return new BrobInt(reversed);
    }
 
   /** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -107,9 +108,9 @@ public class BrobInt {
    *  NOTE: you can use this or not, as you see fit; explanation was given in class
    *  @see StringBuffer API page for an easy way to do this
    *  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
-   public static BrobInt reverser( BrobInt bint ) {
-      return 
-   }
+   //public static BrobInt reverser( BrobInt bint ) {
+      //return
+   //}
 
   /** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
    *  Method to add the value of a BrobIntk passed as argument to this BrobInt
