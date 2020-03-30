@@ -91,15 +91,16 @@ public class BrobInt {
    *  NOTE: you can use this or not, as you see fit; explanation was given in class
    *  @see StringBuffer API page for an easy way to do this
    *  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
-   public BrobInt reverser() {
+   public BrobInt reverse() {
       for (int i = (internalValue.length()-1); i >= 0; i--){
-         reversed.append(internalValue.charAt(i));
+         char c = internalValue.charAt(i);
+         reversed+=c;
       }
       System.out.println("Your reversed string is: " + reversed);
    }
 
   /** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-   *  Method to reverse the value of a BrobIntk passed as argument
+   *  Method to reverse the value of a BrobInt passed as argument
    *  Note: static method
    *  @param  bint         BrobInt to reverse its value
    *  @return BrobInt that is the reverse of the value of the BrobInt passed as argument
@@ -107,7 +108,7 @@ public class BrobInt {
    *  @see StringBuffer API page for an easy way to do this
    *  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
    public static BrobInt reverser( BrobInt bint ) {
-      throw new UnsupportedOperationException( "\n         Sorry, that operation is not yet implemented." );
+      return 
    }
 
   /** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
