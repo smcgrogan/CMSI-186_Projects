@@ -41,6 +41,7 @@ public class BrobInt {
    public  byte   sign          = 0;         // "0" is positive, "1" is negative
   /// You can use this or not, as you see fit.  The explanation was provided in class
    private String reversed      = "";        // the backwards version of the internal String representation
+   public int[] Array;
 
    private static BufferedReader input = new BufferedReader( new InputStreamReader( System.in ) );
    private static final boolean DEBUG_ON = false;
@@ -111,6 +112,14 @@ public class BrobInt {
    //public static BrobInt reverser( BrobInt bint ) {
       //return
    //}
+   //this creates an integer array of the reversed BrobInt string
+   public int[] intArray(){
+      int[] intArray = new int[reversed.length()];
+      for (int i = 0; i < reversed.length(); i++){
+         intArray[i] = reversed.charAt(i);
+      }
+      return intArray;
+   }
 
   /** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
    *  Method to add the value of a BrobIntk passed as argument to this BrobInt
@@ -118,11 +127,33 @@ public class BrobInt {
    *  @return BrobInt that is the sum of the value of this BrobInt and the one passed in
    *  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
    public BrobInt add( BrobInt bint ) {
-      throw new UnsupportedOperationException( "\n         Sorry, that operation is not yet implemented." );
+       if (removeLeadingZeros(this).toString().length() >= removeLeadingZeros(bint).toString().length()){
+          int[] a = removeLeadingZeros(this).reverser().intArray();
+          int[] b = removeLeadingZeros(bint).reverser().intArray();
+          int[] c = new int[removeLeadingZeros(this).toString().length()];
+       }
+       else if (removeLeadingZeros(this).toString().length() < removeLeadingZeros(bint).toString().length()){
+         int[] a = removeLeadingZeros(bint).reverser().intArray();
+         int[] b = removeLeadingZeros(this).reverser().intArray();
+         int[] c = new int[removeLeadingZeros(bint).toString().length()];
+       }
+       int carry = 0;
+       for (int i = 0; i < b.length(); i++){
+          if (a[i]+b[i] >= 10){
+             int carry += 1;
+             c[i] = a[i] + b[i];
+          }
+          else{
+             c[i] = a[i] + b[i] + carry;
+             carry = 0;
+          }
+       }
+       //somehow account for the rest of the bigger string and put in the end of c (need to reverse this back soon);
+       return c;
    }
 
   /** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-   *  Method to subtract the value of a BrobIntk passed as argument to this BrobInt
+   *  Method to subtract the value of a BrobInt passed as argument to this BrobInt
    *  @param  bint         BrobInt to subtract from this
    *  @return BrobInt that is the difference of the value of this BrobInt and the one passed in
    *  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
