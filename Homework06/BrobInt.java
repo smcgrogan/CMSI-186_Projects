@@ -127,29 +127,47 @@ public class BrobInt {
    *  @return BrobInt that is the sum of the value of this BrobInt and the one passed in
    *  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
    public BrobInt add( BrobInt bint ) {
+     int carry = 0;
        if (removeLeadingZeros(this).toString().length() >= removeLeadingZeros(bint).toString().length()){
           int[] a = removeLeadingZeros(this).reverser().intArray();
           int[] b = removeLeadingZeros(bint).reverser().intArray();
           int[] c = new int[removeLeadingZeros(this).toString().length()];
+          for (int i = 0; i < b.length; i++){
+             if (a[i]+b[i] >= 10){
+                c[i] = a[i] + b[i] + carry;
+                carry = 1;
+             }
+             else{
+                c[i] = a[i] + b[i] + carry;
+                carry = 0;
+             }
+          }
+          for (int i = b.length; i < a.length; i++){
+             c[i] = a[i];
+          }
+          BrobInt sum = new BrobInt(c.toString());
+          return sum.reverser();
        }
        else if (removeLeadingZeros(this).toString().length() < removeLeadingZeros(bint).toString().length()){
          int[] a = removeLeadingZeros(bint).reverser().intArray();
          int[] b = removeLeadingZeros(this).reverser().intArray();
          int[] c = new int[removeLeadingZeros(bint).toString().length()];
+         for (int i = 0; i < b.length; i++){
+            if (a[i]+b[i] >= 10){
+               c[i] = a[i] + b[i] + carry;
+               carry = 1;
+            }
+            else{
+               c[i] = a[i] + b[i] + carry;
+               carry = 0;
+            }
+         }
+         for (int i = b.length; i < a.length; i++){
+            c[i] = a[i];
+         }
+         BrobInt sum = new BrobInt(c.toString());
+         return sum.reverser();
        }
-       int carry = 0;
-       for (int i = 0; i < b.length(); i++){
-          if (a[i]+b[i] >= 10){
-             int carry += 1;
-             c[i] = a[i] + b[i];
-          }
-          else{
-             c[i] = a[i] + b[i] + carry;
-             carry = 0;
-          }
-       }
-       //somehow account for the rest of the bigger string and put in the end of c (need to reverse this back soon);
-       return c;
    }
 
   /** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
