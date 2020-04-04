@@ -1,0 +1,450 @@
+.                                                                              
+=====================================================                          
+Testing the SkateRamp Ingetration Project Homework # 05                        
+=====================================================                          
+.                                                                              
+.                                                                              
+... Running built-in tests in the SkateRamp class                              
+...   should either throw exceptions which will not appear in the output file  
+...     but which should be caught to keep the test program running            
+...   or preferably output error messages which SHOULD appear there then quit  
+First input must be: poly or sin or cos or tan or runMyTests
+.                                                                              
+.                                                                              
+============================================================================   
+Testing bogus function name 'bogus'                                            
+...should either throw an exception which will not appear in the output file   
+...  or preferably ouput error messages which SHOULD appear there, then quit   
+============================================================================   
+First input must be: poly or sin or cos or tan or runMyTests
+.                                                                              
+.                                                                              
+============================================================================   
+Testing bogus function name 'poly' with no arguments                           
+...should either throw an exception which will not appear in the output file   
+...  or preferably ouput error messages which SHOULD appear there, then quit   
+============================================================================   
+You did not include enough arguments!
+This is how you use SkateRamp: 
+  java SkateRamp <function> <coef1> <coef2>...<lower bound> <upper bound> [percent]% 
+  where: 
+   <function> = poly, sin, log, exp, or sqrt
+   <coef> = coefficient of the x-value(s) 
+   <lower bound> = lower bound of skate ramp, must be less than upper bound 
+   <upper bound> = upper bound of skate ramp, must be greater than lower bound 
+   <percent> = optional percent of accuracy for area estimation, 
+   assumed percent if none inputted = 1.00%
+.                                                                              
+.                                                                              
+============================================================================   
+Testing valid function name 'poly' with only one arg                           
+...should either throw an exception which will not appear in the output file   
+...  or preferably ouput error messages which SHOULD appear there, then quit   
+============================================================================   
+You did not include enough arguments!
+This is how you use SkateRamp: 
+  java SkateRamp <function> <coef1> <coef2>...<lower bound> <upper bound> [percent]% 
+  where: 
+   <function> = poly, sin, log, exp, or sqrt
+   <coef> = coefficient of the x-value(s) 
+   <lower bound> = lower bound of skate ramp, must be less than upper bound 
+   <upper bound> = upper bound of skate ramp, must be greater than lower bound 
+   <percent> = optional percent of accuracy for area estimation, 
+   assumed percent if none inputted = 1.00%
+.                                                                              
+.                                                                              
+============================================================================   
+Testing valid function name 'poly' with only two args                          
+...should either throw an exception which will not appear in the output file   
+...  or preferably ouput error messages which SHOULD appear there, then quit   
+============================================================================   
+You did not include enough arguments!
+This is how you use SkateRamp: 
+  java SkateRamp <function> <coef1> <coef2>...<lower bound> <upper bound> [percent]% 
+  where: 
+   <function> = poly, sin, log, exp, or sqrt
+   <coef> = coefficient of the x-value(s) 
+   <lower bound> = lower bound of skate ramp, must be less than upper bound 
+   <upper bound> = upper bound of skate ramp, must be greater than lower bound 
+   <percent> = optional percent of accuracy for area estimation, 
+   assumed percent if none inputted = 1.00%
+.                                                                              
+.                                                                              
+============================================================================   
+Testing valid function name 'poly' with four args with negative final arg      
+...should either throw an exception which will not appear in the output file   
+...  or preferably ouput error messages which SHOULD appear there, then quit   
+============================================================================   
+Coef at position: 0 is: 2.0
+Coef at position: 1 is: 1.0
+Input does not contain percent. Auto-percent is 1.00%
+This is how you use SkateRamp: 
+  java SkateRamp <function> <coef1> <coef2>...<lower bound> <upper bound> [percent]% 
+  where: 
+   <function> = poly, sin, log, exp, or sqrt
+   <coef> = coefficient of the x-value(s) 
+   <lower bound> = lower bound of skate ramp, must be less than upper bound 
+   <upper bound> = upper bound of skate ramp, must be greater than lower bound 
+   <percent> = optional percent of accuracy for area estimation, 
+   assumed percent if none inputted = 1.00%
+Upper limit cannot be greater than lower
+.                                                                              
+.                                                                              
+============================================================================   
+Testing valid function name 'poly' with four args with zero final arg          
+...should either throw an exception which will not appear in the output file   
+...  or preferably ouput error messages which SHOULD appear there, then quit   
+============================================================================   
+Coef at position: 0 is: 0.0
+Coef at position: 1 is: 1.0
+Input does not contain percent. Auto-percent is 1.00%
+This is how you use SkateRamp: 
+  java SkateRamp <function> <coef1> <coef2>...<lower bound> <upper bound> [percent]% 
+  where: 
+   <function> = poly, sin, log, exp, or sqrt
+   <coef> = coefficient of the x-value(s) 
+   <lower bound> = lower bound of skate ramp, must be less than upper bound 
+   <upper bound> = upper bound of skate ramp, must be greater than lower bound 
+   <percent> = optional percent of accuracy for area estimation, 
+   assumed percent if none inputted = 1.00%
+Upper limit cannot be greater than lower
+.                                                                              
+.                                                                              
+============================================================================   
+Testing valid function name 'poly' with three args and default percentage      
+...should produce a result close to '0.0000'                                   
+============================================================================   
+Coef at position: 0 is: 0.0
+Input does not contain percent. Auto-percent is 1.00%
+yVal: 0.0 width is: 0.5
+yVal: 0.0 width is: 0.5
+Total area is: 0.0
+.                                                                              
+.                                                                              
+============================================================================   
+Testing valid function name 'poly' with three args with final arg 1e-6%       
+...should produce a result close to '2.0000'                                   
+============================================================================   
+This is how you use SkateRamp: 
+  java SkateRamp <function> <coef1> <coef2>...<lower bound> <upper bound> [percent]% 
+  where: 
+   <function> = poly, sin, log, exp, or sqrt
+   <coef> = coefficient of the x-value(s) 
+   <lower bound> = lower bound of skate ramp, must be less than upper bound 
+   <upper bound> = upper bound of skate ramp, must be greater than lower bound 
+   <percent> = optional percent of accuracy for area estimation, 
+   assumed percent if none inputted = 1.00%
+You did not include enough arguments!
+.                                                                              
+.                                                                              
+============================================================================   
+Testing valid function name 'poly' with test case parabola args and 1e-6%     
+...should produce a result close to '18.0000'                                  
+============================================================================   
+Coef at position: 0 is: 0.0
+Coef at position: 1 is: 8.0
+Coef at position: 2 is: -2.0
+Contains percent.
+yVal: 7.875 width is: 1.5
+yVal: 4.875 width is: 1.5
+Total area is: 19.125
+.                                                                              
+.                                                                              
+============================================================================   
+Testing valid function name 'poly' with test case parabola args and default    
+...should produce a result close to '18.1800'                                  
+============================================================================   
+Coef at position: 0 is: 0.0
+Coef at position: 1 is: 8.0
+Coef at position: 2 is: -2.0
+Input does not contain percent. Auto-percent is 1.00%
+yVal: 7.875 width is: 1.5
+yVal: 4.875 width is: 1.5
+Total area is: 19.125
+.                                                                              
+.                                                                              
+============================================================================   
+Testing valid function name 'poly' with web page args and default              
+...should produce a result close to '1268.75'                                  
+============================================================================   
+Coef at position: 0 is: 1.0
+Coef at position: 1 is: -2.1
+Coef at position: 2 is: 3.2
+Input does not contain percent. Auto-percent is 1.00%
+yVal: 139.125 width is: 7.5
+yVal: 3.375 width is: 7.5
+Total area is: 1068.75
+.                                                                              
+.                                                                              
+============================================================================   
+Testing valid function name 'poly' for x\5 - 2X\3 - X\2 - 7X - 3            
+   from 0 to 2 with 1e-6%                                                    
+...should produce a result close to '-20.00'                                   
+============================================================================   
+Coef at position: 0 is: -3.0
+Coef at position: 1 is: -7.0
+Coef at position: 2 is: -1.0
+Coef at position: 3 is: -2.0
+Coef at position: 4 is: 0.0
+Coef at position: 5 is: 1.0
+Contains percent.
+yVal: -6.96875 width is: 1.0
+yVal: -14.90625 width is: 1.0
+Total area is: -21.875
+.                                                                              
+.                                                                              
+============================================================================   
+Testing valid function name 'sin' with web page args and default               
+...should produce a result close to '1.9137'                                   
+============================================================================   
+You did not include enough arguments!
+This is how you use SkateRamp: 
+  java SkateRamp <function> <coef1> <coef2>...<lower bound> <upper bound> [percent]% 
+  where: 
+   <function> = poly, sin, log, exp, or sqrt
+   <coef> = coefficient of the x-value(s) 
+   <lower bound> = lower bound of skate ramp, must be less than upper bound 
+   <upper bound> = upper bound of skate ramp, must be greater than lower bound 
+   <percent> = optional percent of accuracy for area estimation, 
+   assumed percent if none inputted = 1.00%
+.                                                                              
+.                                                                              
+============================================================================   
+Testing valid function name 'sin' with args -3.45 6.789 and 1.5e-4%           
+...should produce a result close to '-1.8278'                                  
+============================================================================   
+This is how you use SkateRamp: 
+  java SkateRamp <function> <coef1> <coef2>...<lower bound> <upper bound> [percent]% 
+  where: 
+   <function> = poly, sin, log, exp, or sqrt
+   <coef> = coefficient of the x-value(s) 
+   <lower bound> = lower bound of skate ramp, must be less than upper bound 
+   <upper bound> = upper bound of skate ramp, must be greater than lower bound 
+   <percent> = optional percent of accuracy for area estimation, 
+   assumed percent if none inputted = 1.00%
+You did not include enough arguments!
+.                                                                              
+.                                                                              
+============================================================================   
+Testing valid function name 'sin' with args 0.0 1.0 -3.45 6.789 and 1.5e-4%   
+...should produce a result close to '-1.8278'                                  
+============================================================================   
+Coef at position: 0 is: 0.0
+Coef at position: 1 is: 1.0
+Contains percent.
+Area total is: -8.512551607680846
+.                                                                              
+.                                                                              
+============================================================================   
+Testing valid function name 'sin' with args -17.0 3.0 -11.0 11.0 and 1e-7%    
+...should produce a result close to '0.6409'                                   
+============================================================================   
+Coef at position: 0 is: -17.0
+Coef at position: 1 is: 3.0
+Contains percent.
+Area total is: -14.856220926507174
+.                                                                              
+.                                                                              
+============================================================================   
+Testing valid function name 'sin' with args -17.0 1.0 -23.0 23.0 and 1e-4%    
+...should produce a result close to '-1.6276'                                  
+============================================================================   
+Coef at position: 0 is: -17.0
+Coef at position: 1 is: 1.0
+Contains percent.
+Area total is: 21.373807212415333
+.                                                                              
+.                                                                              
+============================================================================   
+Testing valid function name 'sqrt' with args 23.0 -3.0 7.0 1.0 7.0 and 1e-6%  
+...should output a result close to 67.8939                                     
+============================================================================   
+First input must be: poly or sin or cos or tan or runMyTests
+.                                                                              
+.                                                                              
+============================================================================   
+Testing valid function name 'sqrt' with args 100.0 0.0 1.0 and 1e-8%          
+...should output a result close to 10.0                                        
+============================================================================   
+First input must be: poly or sin or cos or tan or runMyTests
+.                                                                              
+.                                                                              
+============================================================================   
+Testing valid function name 'sqrt' with args -100.0 0.0 1.0 and 1e-8%         
+...should either throw an exception which will not appear in the output file   
+...  or preferably ouput error messages which SHOULD appear there, then quit   
+...  Also acceptable is the java output of 'NaN'                               
+============================================================================   
+First input must be: poly or sin or cos or tan or runMyTests
+.                                                                              
+.                                                                              
+============================================================================   
+Testing valid function name 'sqrt' with args 2.0 0.0 1.0 and 1e-3%            
+...should output a result close to 1.4142                                      
+============================================================================   
+First input must be: poly or sin or cos or tan or runMyTests
+.                                                                              
+.                                                                              
+============================================================================   
+Testing valid function name 'cos' with web page args and default               
+...should produce a result close to '-0.1326'                                  
+============================================================================   
+You did not include enough arguments!
+This is how you use SkateRamp: 
+  java SkateRamp <function> <coef1> <coef2>...<lower bound> <upper bound> [percent]% 
+  where: 
+   <function> = poly, sin, log, exp, or sqrt
+   <coef> = coefficient of the x-value(s) 
+   <lower bound> = lower bound of skate ramp, must be less than upper bound 
+   <upper bound> = upper bound of skate ramp, must be greater than lower bound 
+   <percent> = optional percent of accuracy for area estimation, 
+   assumed percent if none inputted = 1.00%
+.                                                                              
+.                                                                              
+============================================================================   
+Testing valid function name 'cos' with args -3.45 6.789 and 1.5e-4%           
+...should produce a result close to '0.1810'                                   
+============================================================================   
+This is how you use SkateRamp: 
+  java SkateRamp <function> <coef1> <coef2>...<lower bound> <upper bound> [percent]% 
+  where: 
+   <function> = poly, sin, log, exp, or sqrt
+   <coef> = coefficient of the x-value(s) 
+   <lower bound> = lower bound of skate ramp, must be less than upper bound 
+   <upper bound> = upper bound of skate ramp, must be greater than lower bound 
+   <percent> = optional percent of accuracy for area estimation, 
+   assumed percent if none inputted = 1.00%
+You did not include enough arguments!
+.                                                                              
+.                                                                              
+============================================================================   
+Testing valid function name 'cos' with args 0.0 1.0 -3.45 6.789 and 1.5e-4%   
+...should produce a result close to '0.1810'                                   
+============================================================================   
+Coef at position: 0 is: 0.0
+Coef at position: 1 is: 1.0
+Contains percent.
+Area total is: 0.8429593783862863
+.                                                                              
+.                                                                              
+============================================================================   
+Testing valid function name 'cos' with args -17.0 3.0 -11.0 11.0 and 1e-7%    
+...should produce a result close to '-0.1834'                                  
+============================================================================   
+Coef at position: 0 is: -17.0
+Coef at position: 1 is: 3.0
+Contains percent.
+Area total is: 4.252026217561456
+.                                                                              
+.                                                                              
+============================================================================   
+Testing valid function name 'cos' with args -17.0 1.0 -23.0 23.0 and 1e-4%    
+...should produce a result close to '0.4658'                                   
+============================================================================   
+Coef at position: 0 is: -17.0
+Coef at position: 1 is: 1.0
+Contains percent.
+Area total is: -6.117436532876148
+.                                                                              
+.                                                                              
+============================================================================   
+Testing valid function name 'tan' with args -0.5 1.25 and default              
+...should produce a result close to '1.0029'                                   
+============================================================================   
+You did not include enough arguments!
+This is how you use SkateRamp: 
+  java SkateRamp <function> <coef1> <coef2>...<lower bound> <upper bound> [percent]% 
+  where: 
+   <function> = poly, sin, log, exp, or sqrt
+   <coef> = coefficient of the x-value(s) 
+   <lower bound> = lower bound of skate ramp, must be less than upper bound 
+   <upper bound> = upper bound of skate ramp, must be greater than lower bound 
+   <percent> = optional percent of accuracy for area estimation, 
+   assumed percent if none inputted = 1.00%
+.                                                                              
+.                                                                              
+============================================================================   
+Testing valid function name 'tan' with args -0.5 1.25 and 1.5e-4%             
+...should produce a result close to '1.0235'                                   
+============================================================================   
+This is how you use SkateRamp: 
+  java SkateRamp <function> <coef1> <coef2>...<lower bound> <upper bound> [percent]% 
+  where: 
+   <function> = poly, sin, log, exp, or sqrt
+   <coef> = coefficient of the x-value(s) 
+   <lower bound> = lower bound of skate ramp, must be less than upper bound 
+   <upper bound> = upper bound of skate ramp, must be greater than lower bound 
+   <percent> = optional percent of accuracy for area estimation, 
+   assumed percent if none inputted = 1.00%
+You did not include enough arguments!
+.                                                                              
+.                                                                              
+============================================================================   
+Testing valid function name 'tan' with args 0.0 1.0 -0.5 1.25 and 1.5e-4%     
+...should produce a result close to '1.0235'                                   
+============================================================================   
+Coef at position: 0 is: 0.0
+Coef at position: 1 is: 1.0
+Contains percent.
+Area total is: 0.8690028653649393
+.                                                                              
+.                                                                              
+============================================================================   
+Testing valid function name 'log' with args 0.0 1.0 1.1 2.3 and 1e-5%         
+...should produce a result close to '0.6109'                                   
+============================================================================   
+First input must be: poly or sin or cos or tan or runMyTests
+.                                                                              
+.                                                                              
+============================================================================   
+Testing valid function name 'log'                                              
+...should produce a result close to '0.6140'                                   
+============================================================================   
+First input must be: poly or sin or cos or tan or runMyTests
+.                                                                              
+.                                                                              
+============================================================================   
+Testing valid function name 'exp' with web page args and default prct          
+...should produce a result close to '25.5763'                                  
+============================================================================   
+First input must be: poly or sin or cos or tan or runMyTests
+.                                                                              
+.                                                                              
+============================================================================   
+Testing valid function name 'log10' with args 0.0 1.0 1.1 2.3 and 1e-5%       
+...should produce a result close to '0.2653'                                   
+============================================================================   
+First input must be: poly or sin or cos or tan or runMyTests
+.                                                                              
+.                                                                              
+============================================================================   
+Testing valid function name 'log10'                                            
+...should produce a result close to '0.2653'                                   
+============================================================================   
+First input must be: poly or sin or cos or tan or runMyTests
+.                                                                              
+.                                                                              
+============================================================================   
+Testing valid function name 'exp' with web page args and 1.6e-7%              
+...should produce a result close to '25.7264'                                  
+============================================================================   
+First input must be: poly or sin or cos or tan or runMyTests
+.                                                                              
+.                                                                              
+============================================================================   
+Testing valid function name 'exp' with 0.0 1.0 2.0 3.5 and 1e-7%              
+...should produce a result close to '25.7264'                                  
+============================================================================   
+First input must be: poly or sin or cos or tan or runMyTests
+.                                                                              
+.                                                                              
+============================================================================   
+Testing valid function name 'exp' with web page args and default prct          
+...should produce a result close to '25.5763'                                  
+============================================================================   
+First input must be: poly or sin or cos or tan or runMyTests
+.                                                                              
+.                                                                              
+============================================================================   
+End of Testing                                                                 
+============================================================================   
