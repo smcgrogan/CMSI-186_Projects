@@ -127,11 +127,15 @@ public class BrobInt {
    *  @return BrobInt that is the sum of the value of this BrobInt and the one passed in
    *  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
    public BrobInt add( BrobInt bint ) {
+
      int carry = 0;
-       if (removeLeadingZeros(this).toString().length() >= removeLeadingZeros(bint).toString().length()){
-          int[] a = removeLeadingZeros(this).reverser().intArray();
-          int[] b = removeLeadingZeros(bint).reverser().intArray();
-          int[] c = new int[removeLeadingZeros(this).toString().length()];
+     int[] a = null;
+     int[] b = null;
+     int[] c = null;
+     if (removeLeadingZeros(this).toString().length() >= removeLeadingZeros(bint).toString().length()){
+          a = removeLeadingZeros(this).reverser().intArray();
+          b = removeLeadingZeros(bint).reverser().intArray();
+          c = new int[removeLeadingZeros(this).toString().length()];
           for (int i = 0; i < b.length; i++){
              if (a[i]+b[i] >= 10){
                 c[i] = a[i] + b[i] + carry;
@@ -145,13 +149,11 @@ public class BrobInt {
           for (int i = b.length; i < a.length; i++){
              c[i] = a[i];
           }
-          BrobInt sum = new BrobInt(c.toString());
-          return sum.reverser();
-       }
-       else if (removeLeadingZeros(this).toString().length() < removeLeadingZeros(bint).toString().length()){
-         int[] a = removeLeadingZeros(bint).reverser().intArray();
-         int[] b = removeLeadingZeros(this).reverser().intArray();
-         int[] c = new int[removeLeadingZeros(bint).toString().length()];
+     }
+     else if (removeLeadingZeros(this).toString().length() < removeLeadingZeros(bint).toString().length()){
+         a = removeLeadingZeros(bint).reverser().intArray();
+         b = removeLeadingZeros(this).reverser().intArray();
+         c = new int[removeLeadingZeros(bint).toString().length()];
          for (int i = 0; i < b.length; i++){
             if (a[i]+b[i] >= 10){
                c[i] = a[i] + b[i] + carry;
@@ -165,9 +167,9 @@ public class BrobInt {
          for (int i = b.length; i < a.length; i++){
             c[i] = a[i];
          }
-         BrobInt sum = new BrobInt(c.toString());
-         return sum.reverser();
        }
+       BrobInt sum = new BrobInt(c.toString());
+       return sum.reverser();
    }
 
   /** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -176,7 +178,47 @@ public class BrobInt {
    *  @return BrobInt that is the difference of the value of this BrobInt and the one passed in
    *  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
    public BrobInt subtract( BrobInt bint ) {
-      throw new UnsupportedOperationException( "\n         Sorry, that operation is not yet implemented." );
+     int[] a = null;
+     int[] b = null;
+     int[] c = null;
+     if (removeLeadingZeros(this).toString().length() >= removeLeadingZeros(bint).toString().length()){
+          a = removeLeadingZeros(this).reverser().intArray();
+          b = removeLeadingZeros(bint).reverser().intArray();
+          c = new int[removeLeadingZeros(this).toString().length()];
+          for (int i = 0; i < b.length; i++){
+             if (a[i]-b[i] <= 0){
+                a[i+1] = a[i-1] - 1;
+                a[i] = a[i] + 10;
+                c[i] = a[i] + b[i];
+             }
+             else{
+                c[i] = a[i] + b[i];
+             }
+          }
+          for (int i = b.length; i < a.length; i++){
+             c[i] = a[i];
+          }
+     }
+     else if (removeLeadingZeros(this).toString().length() < removeLeadingZeros(bint).toString().length()){
+         a = removeLeadingZeros(bint).reverser().intArray();
+         b = removeLeadingZeros(this).reverser().intArray();
+         c = new int[removeLeadingZeros(bint).toString().length()];
+         for (int i = 0; i < b.length; i++){
+            if (a[i]+b[i] >= 10){
+              a[i+1] = a[i-1] - 1;
+              a[i] = a[i] + 10;
+              c[i] = a[i] + b[i];
+            }
+            else{
+               c[i] = a[i] + b[i];
+            }
+         }
+         for (int i = b.length; i < a.length; i++){
+            c[i] = a[i];
+         }
+       }
+       BrobInt diff = new BrobInt(c.toString());
+       return diff.reverser();
    }
 
   /** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
