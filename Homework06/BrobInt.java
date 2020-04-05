@@ -257,6 +257,7 @@ public class BrobInt {
           c = Integer.parseInt(this.subtract(bint).toString());
           if (c <= Integer.parseInt(bint.toString())){
               total = i + (c/Integer.parseInt(this.toString()));
+              break;
           }
        }
        BrobInt div = new BrobInt(Integer.toString(total));
@@ -269,7 +270,17 @@ public class BrobInt {
    *  @return BrobInt that is the remainder of division of this BrobInt by the one passed in
    *  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
    public BrobInt remainder( BrobInt bint ) {
-      throw new UnsupportedOperationException( "\n         Sorry, that operation is not yet implemented." );
+     int r = 0;
+     int c = 0;
+     for (int i = 1; i < Integer.parseInt(this.toString()); i++){
+         c = Integer.parseInt(this.subtract(bint).toString());
+         if (c <= Integer.parseInt(bint.toString())){
+             r = i;
+             break;
+         }
+      }
+      BrobInt rem = new BrobInt(Integer.toString(r));
+      return rem;
    }
 
   /** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
