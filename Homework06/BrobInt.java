@@ -17,17 +17,17 @@ import java.io.IOException;
 
 public class BrobInt {
 
-   // public static final BrobInt ZERO     = new BrobInt(  "0" );      /// Constant for "zero"
-   // public static final BrobInt ONE      = new BrobInt(  "1" );      /// Constant for "one"
-   // public static final BrobInt TWO      = new BrobInt(  "2" );      /// Constant for "two"
-   // public static final BrobInt THREE    = new BrobInt(  "3" );      /// Constant for "three"
-   // public static final BrobInt FOUR     = new BrobInt(  "4" );      /// Constant for "four"
-   // public static final BrobInt FIVE     = new BrobInt(  "5" );      /// Constant for "five"
-   // public static final BrobInt SIX      = new BrobInt(  "6" );      /// Constant for "six"
-   // public static final BrobInt SEVEN    = new BrobInt(  "7" );      /// Constant for "seven"
-   // public static final BrobInt EIGHT    = new BrobInt(  "8" );      /// Constant for "eight"
-   // public static final BrobInt NINE     = new BrobInt(  "9" );      /// Constant for "nine"
-   // public static final BrobInt TEN      = new BrobInt( "10" );      /// Constant for "ten"
+    public static final BrobInt ZERO     = new BrobInt(  "0" );      /// Constant for "zero"
+    public static final BrobInt ONE      = new BrobInt(  "1" );      /// Constant for "one"
+    public static final BrobInt TWO      = new BrobInt(  "2" );      /// Constant for "two"
+    public static final BrobInt THREE    = new BrobInt(  "3" );      /// Constant for "three"
+    public static final BrobInt FOUR     = new BrobInt(  "4" );      /// Constant for "four"
+    public static final BrobInt FIVE     = new BrobInt(  "5" );      /// Constant for "five"
+    public static final BrobInt SIX      = new BrobInt(  "6" );      /// Constant for "six"
+    public static final BrobInt SEVEN    = new BrobInt(  "7" );      /// Constant for "seven"
+    public static final BrobInt EIGHT    = new BrobInt(  "8" );      /// Constant for "eight"
+    public static final BrobInt NINE     = new BrobInt(  "9" );      /// Constant for "nine"
+    public static final BrobInt TEN      = new BrobInt( "10" );      /// Constant for "ten"
 
   /// Some constants for other intrinsic data types
   ///  these can help speed up the math if they fit into the proper memory space
@@ -226,12 +226,19 @@ public class BrobInt {
    *  @param  bint         BrobInt to multiply this by
    *  @return BrobInt that is the product of the value of this BrobInt and the one passed in
    *  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+   //public BrobInt multiply( BrobInt bint ) {
+  //    BrobInt total = new BrobInt();
+  //    for (BrobInt i = BrobInt.ZERO; i <= this; i.add(BrobInt.ONE)){
+  //       total.add(bint.add(bint));
+  //    }
+  //    return total;
+   //}
    public BrobInt multiply( BrobInt bint ) {
-      int a = 0; //check if this array is the correct way to add these
+      int a = Integer.valueOf(0); //check if this array is the correct way to add these
       for (int i = 0; i < Integer.parseInt(this.toString()); i++){
          a += Integer.parseInt(bint.add(bint).toString());
       }
-      BrobInt multiple = new BrobInt(a.toString());
+      BrobInt multiple = new BrobInt(Integer.toString(a));
       return multiple;
    }
 
