@@ -253,24 +253,14 @@ public class BrobInt {
       //stop the loop at this point and return the counter with the remainder total
       int c = 0;
       int total = 0;
-      if (removeLeadingZeros(this).toString().length() >= removeLeadingZeros(bint).toString().length()){
-           for (int i = 1; i < Integer.parseInt(this.toString()); i++){
-              c = Integer.parseInt(this.subtract(bint).toString());
-              if (c <= Integer.parseInt(bint.toString())){
-                 total = i + (c/Integer.parseInt(this.toString()));
-              }
-           }
-      }
-      else if (removeLeadingZeros(this).toString().length() < removeLeadingZeros(bint).toString().length()){
-          for (int i = 1; i < Integer.parseInt(bint.toString()); i++){
-             c = Integer.parseInt(bint.subtract(this).toString());
-             if (c <= Integer.parseInt(bint.toString())){
-                total = i + (c/Integer.parseInt(bint.toString()));
-             }
+      for (int i = 1; i < Integer.parseInt(this.toString()); i++){
+          c = Integer.parseInt(this.subtract(bint).toString());
+          if (c <= Integer.parseInt(bint.toString())){
+              total = i + (c/Integer.parseInt(this.toString()));
           }
-        }
-        BrobInt div = new BrobInt(Integer.toString(total));
-        return div;
+       }
+       BrobInt div = new BrobInt(Integer.toString(total));
+       return div;
    }
 
   /** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
