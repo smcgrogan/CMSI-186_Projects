@@ -41,7 +41,6 @@ public class BrobInt {
    public  byte   sign          = 0;         // "0" is positive, "1" is negative
   /// You can use this or not, as you see fit.  The explanation was provided in class
    private String reversed      = "";        // the backwards version of the internal String representation
-   public int[] Array;
 
    private static BufferedReader input = new BufferedReader( new InputStreamReader( System.in ) );
    private static final boolean DEBUG_ON = false;
@@ -118,6 +117,7 @@ public class BrobInt {
       for (int i = 0; i < reversed.length(); i++){
          intArray[i] = reversed.charAt(i);
       }
+      System.out.println("Your intArray is " + intArray);
       return intArray;
    }
 
@@ -445,7 +445,7 @@ public class BrobInt {
    *  NOTE:  we don't really care about these, since we test the BrobInt class with the BrobIntTester
    *  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
    public static void main( String[] args ) {
-      /** ~~~
+
       System.out.println( "\n  Hello, world, from the BrobInt program!!\n" );
       System.out.println( "\n   You should run your tests from the BrobIntTester, but here are a few...\n" );
 
@@ -456,11 +456,11 @@ public class BrobInt {
       catch( Exception e ) { System.out.println( "        Exception thrown:  " + e.toString() ); }
 
       System.out.println( "\n    Multiplying 82832833 by 3: " );
-      try { System.out.println( "      expecting: 248498499\n        and got: " + new BrobInt("82832833").multiply( BrobInt.THREE ) ); }
+      try { System.out.println( "      expecting: 248498499\n        and got: " + new BrobInt("82832833").add( BrobInt.THREE ) ); }
       catch( Exception e ) { System.out.println( "        Exception thrown:  " + e.toString() ); }
 
-      System.out.println( "\n    Multiplying 3 by 82832833 and adding 1: " );
-      try { System.out.println( "      expecting: 248498500\n        and got: " + BrobInt.THREE.multiply( new BrobInt( "82832833" ) ).add( BrobInt.ONE ) ); }
+      System.out.println( "\n    Adding 3 to 82832833: " );
+      try { System.out.println( "      expecting: 82832836\n        and got: " + BrobInt.THREE.add( new BrobInt( "82832833" ) )); }
       catch( Exception e ) { System.out.println( "        Exception thrown:  " + e.toString() ); }
 
       try { System.out.println( "\n\n   Making a new BrobInt: " ); b1 = new BrobInt( "-99999" ); }
@@ -472,7 +472,7 @@ public class BrobInt {
       try { System.out.println( "      expecting: true\n        and got: " + b1.equals( new BrobInt( "-99999" ) ) ); }
       catch( Exception e ) { System.out.println( "        Exception thrown:  " + e.toString() ); }
 
-      System.exit( 0 ); **/
+      System.exit( 0 );
 
    }
 }
