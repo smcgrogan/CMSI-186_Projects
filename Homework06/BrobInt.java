@@ -41,6 +41,7 @@ public class BrobInt {
    public  byte   sign          = 0;         // "0" is positive, "1" is negative
   /// You can use this or not, as you see fit.  The explanation was provided in class
    private String reversed      = "";        // the backwards version of the internal String representation
+   private int[] intArray = null;
 
    private static BufferedReader input = new BufferedReader( new InputStreamReader( System.in ) );
    private static final boolean DEBUG_ON = false;
@@ -64,6 +65,7 @@ public class BrobInt {
       else{
          this.internalValue = value;
       }
+      reversed = new String(new StringBuffer(internalValue).reverse());
    }
 
   /** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -91,13 +93,8 @@ public class BrobInt {
    *  NOTE: you can use this or not, as you see fit; explanation was given in class
    *  @see StringBuffer API page for an easy way to do this
    *  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
-   public BrobInt reverser() {
-      for (int i = (internalValue.length()-1); i >= 0; i--){
-         char c = internalValue.charAt(i);
-         reversed+=c;
-      }
-      System.out.println("Your reversed string is: " + reversed);
-      return new BrobInt(reversed);
+   public static BrobInt reverser(BrobInt bint) {
+      return new BrobInt(new String(new StringBuffer(bint.internalValue).reverse()));
    }
 
   /** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -112,12 +109,15 @@ public class BrobInt {
       //return
    //}
    //this creates an integer array of the reversed BrobInt string
-   public int[] intArray(){
-      int[] intArray = new int[reversed.length()];
+   public int[] makeintArray(){
+      intArray = new int[reversed.length()];
       for (int i = 0; i < reversed.length(); i++){
-         intArray[i] = reversed.charAt(i);
+         System.out.println("reverse is: " + reversed);
+         intArray[i] = reversed.charAt(i) - 48;
+         System.out.println("char " + i + " is " + intArray[i]);
       }
-      System.out.println("Your intArray is " + intArray);
+      toArray(intArray);
+      System.out.println("IntArray is: " + intArray);
       return intArray;
    }
 
@@ -133,8 +133,8 @@ public class BrobInt {
      int[] b = null;
      int[] c = null;
      if (removeLeadingZeros(this).toString().length() >= removeLeadingZeros(bint).toString().length()){
-          a = removeLeadingZeros(this).reverser().intArray();
-          b = removeLeadingZeros(bint).reverser().intArray();
+          a = reverser(removeLeadingZeros(this)).makeintArray();
+          b = reverser(removeLeadingZeros(bint)).makeintArray();
           c = new int[removeLeadingZeros(this).toString().length()];
           for (int i = 0; i < b.length; i++){
              if (a[i]+b[i] >= 10){
@@ -151,8 +151,8 @@ public class BrobInt {
           }
      }
      else if (removeLeadingZeros(this).toString().length() < removeLeadingZeros(bint).toString().length()){
-         a = removeLeadingZeros(bint).reverser().intArray();
-         b = removeLeadingZeros(this).reverser().intArray();
+         a = reverser(removeLeadingZeros(bint)).makeintArray();
+         b = reverser(removeLeadingZeros(this)).makeintArray();
          c = new int[removeLeadingZeros(bint).toString().length()];
          for (int i = 0; i < b.length; i++){
             if (a[i]+b[i] >= 10){
@@ -169,7 +169,7 @@ public class BrobInt {
          }
        }
        BrobInt sum = new BrobInt(c.toString());
-       return sum.reverser();
+       return reverser(sum);
    }
 
   /** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -182,8 +182,8 @@ public class BrobInt {
      int[] b = null;
      int[] c = null;
      if (removeLeadingZeros(this).toString().length() >= removeLeadingZeros(bint).toString().length()){
-          a = removeLeadingZeros(this).reverser().intArray();
-          b = removeLeadingZeros(bint).reverser().intArray();
+          a = reverser(removeLeadingZeros(this)).makeintArray();
+          b = reverser(removeLeadingZeros(bint)).makeintArray();
           c = new int[removeLeadingZeros(this).toString().length()];
           for (int i = 0; i < b.length; i++){
              if (a[i]-b[i] <= 0){
@@ -200,8 +200,8 @@ public class BrobInt {
           }
      }
      else if (removeLeadingZeros(this).toString().length() < removeLeadingZeros(bint).toString().length()){
-         a = removeLeadingZeros(bint).reverser().intArray();
-         b = removeLeadingZeros(this).reverser().intArray();
+         a = reverser(removeLeadingZeros(bint)).makeintArray();
+         b = reverser(removeLeadingZeros(this)).makeintArray();
          c = new int[removeLeadingZeros(bint).toString().length()];
          for (int i = 0; i < b.length; i++){
             if (a[i]+b[i] >= 10){
@@ -218,7 +218,7 @@ public class BrobInt {
          }
        }
        BrobInt diff = new BrobInt(c.toString());
-       return diff.reverser();
+       return reverser(diff);
    }
 
   /** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -460,7 +460,7 @@ public class BrobInt {
       catch( Exception e ) { System.out.println( "        Exception thrown:  " + e.toString() ); }
 
       System.out.println( "\n    Adding 3 to 82832833: " );
-      try { System.out.println( "      expecting: 82832836\n        and got: " + BrobInt.THREE.add( new BrobInt( "82832833" ) )); }
+      try { System.out.println( "      expecting: 82832836\n        and got: " + reverser(BrobInt.THREE).add(reverser(( new BrobInt( "82832833" ) )))); }
       catch( Exception e ) { System.out.println( "        Exception thrown:  " + e.toString() ); }
 
       try { System.out.println( "\n\n   Making a new BrobInt: " ); b1 = new BrobInt( "-99999" ); }
