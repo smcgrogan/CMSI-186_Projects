@@ -234,11 +234,11 @@ public class BrobInt {
   //    return total;
    //}
    public BrobInt multiply( BrobInt bint ) {
-      int a = Integer.valueOf(0); //check if this array is the correct way to add these
-      for (int i = 0; i < Integer.parseInt(this.toString()); i++){
-         a += Integer.parseInt(bint.add(bint).toString());
+      int m = Integer.valueOf(0); //check if this array is the correct way to add these
+      for (int i = 0; i < Integer.parseInt(removeLeadingZeros(this).toString()); i++){
+         m += Integer.parseInt(bint.add(bint).toString());
       }
-      BrobInt multiple = new BrobInt(Integer.toString(a));
+      BrobInt multiple = new BrobInt(Integer.toString(m));
       return multiple;
    }
 
@@ -248,7 +248,29 @@ public class BrobInt {
    *  @return BrobInt that is the dividend of this BrobInt divided by the one passed in
    *  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
    public BrobInt divide( BrobInt bint ) {
-      throw new UnsupportedOperationException( "\n         Sorry, that operation is not yet implemented." );
+      //make an if that find bigger number
+      //create a loop that divides bigger by smaller (count the number of loops) until total is less than the smaller #
+      //stop the loop at this point and return the counter with the remainder total
+      int c = 0;
+      int total = 0;
+      if (removeLeadingZeros(this).toString().length() >= removeLeadingZeros(bint).toString().length()){
+           for (int i = 1; i < Integer.parseInt(this.toString()); i++){
+              c = Integer.parseInt(this.subtract(bint).toString());
+              if (c <= Integer.parseInt(bint.toString())){
+                 total = i + (c/Integer.parseInt(this.toString()));
+              }
+           }
+      }
+      else if (removeLeadingZeros(this).toString().length() < removeLeadingZeros(bint).toString().length()){
+          for (int i = 1; i < Integer.parseInt(bint.toString()); i++){
+             c = Integer.parseInt(bint.subtract(this).toString());
+             if (c <= Integer.parseInt(bint.toString())){
+                total = i + (c/Integer.parseInt(bint.toString()));
+             }
+          }
+        }
+        BrobInt div = new BrobInt(Integer.toString(total));
+        return div;
    }
 
   /** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
