@@ -133,11 +133,11 @@ public class BrobInt {
      this.intArray = new int[this.internalValue.length()];
      bint.intArray = new int[bint.internalValue.length()];
      for (int i = 0; i < removeLeadingZeros(this).toString().length(); i++){
-        this.intArray[i] = Integer.parseInt(reverser(this).charAt(i));
+        this.intArray[i] = Integer.parseInt(reverser(removeLeadingZeros(this)).charAt(i));
      }
      System.out.println("This array: " + Arrays.toString(this.intArray));
      for (int i = 0; i < removeLeadingZeros(bint).toString().length(); i++){
-        bint.intArray[i] = Integer.parseInt(Character.toString(reverser(bint).charAt(i)));
+        bint.intArray[i] = Integer.parseInt(String.valueOf(reverser(removeLeadingZeros(bint)).charAt(i)));
      }
      System.out.println("Bint array: " + Arrays.toString(bint.intArray));
      if (removeLeadingZeros(this).toString().length() >= removeLeadingZeros(bint).toString().length()){
