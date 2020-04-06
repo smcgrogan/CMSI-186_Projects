@@ -173,7 +173,7 @@ public class BrobInt {
        BrobInt sum = new BrobInt(totalA.toString());
        return reverser(sum);
    }
-
+////DID NOT UPDATE OTHER METHODS ON NEW ARRAYS!!!
   /** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
    *  Method to subtract the value of a BrobInt passed as argument to this BrobInt
    *  @param  bint         BrobInt to subtract from this
