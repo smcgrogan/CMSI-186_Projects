@@ -48,6 +48,7 @@ public class BrobInt {
    private static BufferedReader input = new BufferedReader( new InputStreamReader( System.in ) );
    private static final boolean DEBUG_ON = false;
    private static final boolean INFO_ON  = false;
+   private boolean willbeneg = false;
 
   /**
    *  Constructor takes a string and assigns it to the internal storage, checks for a sign character
@@ -208,7 +209,7 @@ public class BrobInt {
              if (a[i]-b[i] <= 0){
                 if(i+1 == a.length){
                    totalA[i] = (b[i] - a[i]);
-                   sign = 1;
+                   willbeneg = true;
                 }
                 else if (a[i+1] == 0){
                    a[2+i] = a[2+i] - 1;
@@ -237,7 +238,7 @@ public class BrobInt {
             if (a[i]-b[i] <= 0){
               if(i+1 == a.length){
                  totalA[i] = (b[i] - a[i]);
-                 sign = 1;
+                 willbeneg = true;
               }
               else if (a[i+1] == 0){
                  a[2+i] = a[2+i] - 1;
@@ -258,15 +259,13 @@ public class BrobInt {
             totalA[i] = a[i];
          }
        }
-       if (sign == 1){
-          totalF = Arrays.copyOf(totalA, totalA.length + 1);
-          totalF[totalF.length - 1] = 1;
-          System.out.println("The 1 at the begging of your answer represents a negative sign");
+       BrobInt diff = null;
+       if (willbeneg = true){
+          diff = new BrobInt("-" + Arrays.toString(totalA).substring(1, Arrays.toString(totalA).length()-1).replace(",","").replace(" ",""));
        }
        else{
-          totalF = Arrays.copyOf(totalA, totalA.length);
+          diff = new BrobInt(Arrays.toString(totalA).substring(1, Arrays.toString(totalA).length()-1).replace(",","").replace(" ",""));
        }
-       BrobInt diff = new BrobInt(Arrays.toString(totalF).substring(1, Arrays.toString(totalF).length()-1).replace(",","").replace(" ",""));
        return reverser(removeLeadingZeros(diff));
    }
 
