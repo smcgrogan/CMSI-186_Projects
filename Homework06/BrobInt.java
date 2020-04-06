@@ -118,7 +118,7 @@ public class BrobInt {
          System.out.println("int " + i + " is " + intArray[i]);
       }
       toArray(intArray);
-      System.out.println("IntArray is: " + intArray);
+      System.out.println("IntArray is: " + Arrays.toString(intArray));
       return intArray;
    }
 
