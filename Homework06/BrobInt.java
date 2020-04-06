@@ -109,12 +109,13 @@ public class BrobInt {
       //return
    //}
    //this creates an integer array of the reversed BrobInt string
+
    public int[] makeintArray(){
       intArray = new int[reversed.length()];
       for (int i = 0; i < reversed.length(); i++){
          System.out.println("reverse is: " + reversed);
          intArray[i] = reversed.charAt(i) - 48;
-         System.out.println("char " + i + " is " + intArray[i]);
+         System.out.println("int " + i + " is " + intArray[i]);
       }
       toArray(intArray);
       System.out.println("IntArray is: " + intArray);
@@ -127,7 +128,6 @@ public class BrobInt {
    *  @return BrobInt that is the sum of the value of this BrobInt and the one passed in
    *  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
    public BrobInt add( BrobInt bint ) {
-
      int carry = 0;
      int[] a = null;
      int[] b = null;
@@ -137,9 +137,9 @@ public class BrobInt {
           b = reverser(removeLeadingZeros(bint)).makeintArray();
           c = new int[removeLeadingZeros(this).toString().length()];
           for (int i = 0; i < b.length; i++){
-             if (a[i]+b[i] >= 10){
+             if (a[i]+b[i]+carry >= 10){
                 c[i] = a[i] + b[i] + carry;
-                carry = 1;
+                carry = a[i] + b[i] + carry - 9;
              }
              else{
                 c[i] = a[i] + b[i] + carry;
@@ -155,14 +155,14 @@ public class BrobInt {
          b = reverser(removeLeadingZeros(this)).makeintArray();
          c = new int[removeLeadingZeros(bint).toString().length()];
          for (int i = 0; i < b.length; i++){
-            if (a[i]+b[i] >= 10){
-               c[i] = a[i] + b[i] + carry;
-               carry = 1;
-            }
-            else{
-               c[i] = a[i] + b[i] + carry;
-               carry = 0;
-            }
+           if (a[i]+b[i]+carry >= 10){
+              c[i] = a[i] + b[i] + carry;
+              carry = a[i] + b[i] + carry - 9;
+           }
+           else{
+              c[i] = a[i] + b[i] + carry;
+              carry = 0;
+           }
          }
          for (int i = b.length; i < a.length; i++){
             c[i] = a[i];
