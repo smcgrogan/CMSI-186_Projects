@@ -28,6 +28,7 @@ public class BrobInt {
     public static final BrobInt EIGHT    = new BrobInt(  "8" );      /// Constant for "eight"
     public static final BrobInt NINE     = new BrobInt(  "9" );      /// Constant for "nine"
     public static final BrobInt TEN      = new BrobInt( "10" );      /// Constant for "ten"
+    public static final BrobInt NEGO     = new BrobInt( "-1" );
 
   /// Some constants for other intrinsic data types
   ///  these can help speed up the math if they fit into the proper memory space
@@ -42,6 +43,7 @@ public class BrobInt {
   /// You can use this or not, as you see fit.  The explanation was provided in class
    private String reversed      = "";        // the backwards version of the internal String representation
    private int[] intArray = null;
+   private int[] totalF = null;
 
    private static BufferedReader input = new BufferedReader( new InputStreamReader( System.in ) );
    private static final boolean DEBUG_ON = false;
@@ -66,6 +68,10 @@ public class BrobInt {
          this.internalValue = value;
       }
       reversed = new String(new StringBuffer(internalValue).reverse());
+      this.intArray = new int[reversed.length()];
+      for (int i = 0; i < this.intArray.length; i++){
+         this.intArray[i] = Character.digit(reversed.charAt(i), 10);
+      }
    }
 
   /** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -110,18 +116,6 @@ public class BrobInt {
    //}
    //this creates an integer array of the reversed BrobInt string
 
-   public int[] makeintArray(){
-      intArray = new int[reversed.length()];
-      for (int i = 0; i < reversed.length(); i++){
-         System.out.println("reverse is: " + reversed);
-         intArray[i] = Integer.parseInt("" + reversed.charAt(i));
-         System.out.println("int " + i + " is " + intArray[i]);
-      }
-      toArray(intArray);
-      System.out.println("IntArray is: " + Arrays.toString(intArray));
-      return intArray;
-   }
-
   /** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
    *  Method to add the value of a BrobIntk passed as argument to this BrobInt
    *  @param  bint         BrobInt to add to this
@@ -130,51 +124,72 @@ public class BrobInt {
    public BrobInt add( BrobInt bint ) {
      int carry = 0;
      int[] totalA = null;
-     this.intArray = new int[this.internalValue.length()];
-     bint.intArray = new int[bint.internalValue.length()];
-     for (int i = 0; i < removeLeadingZeros(this).toString().length(); i++){
-        this.intArray[i] = Integer.parseInt(removeLeadingZeros(reverser(this)).charAt(i));
-     }
-     System.out.println("This array: " + Arrays.toString(this.intArray));
-     for (int i = 0; i < removeLeadingZeros(bint).toString().length(); i++){
-        bint.intArray[i] = Integer.parseInt(String.valueOf(removeLeadingZeros(reverser(bint)).charAt(i)));
-     }
-     System.out.println("Bint array: " + Arrays.toString(bint.intArray));
-     if (removeLeadingZeros(this).toString().length() >= removeLeadingZeros(bint).toString().length()){
-          totalA = new int[this.internalValue.length()];
-          for (int i = 0; i < removeLeadingZeros(bint).toString().length(); i++){
-             if (this.intArray[i] + bint.intArray[i] + carry >= 10){
-                totalA[i] = this.intArray[i] + bint.intArray[i] + carry;
-                carry = 1;
-             }
-             else{
-                totalA[i] = this.intArray[i] + bint.intArray[i] + carry;
-                carry = 0;
-             }
+     int[] a = null;
+     int[] b = null;
+     //bint.intArray = new int[bint.internalValue.length()];
+     //System.out.println("This array: " + Arrays.toString(this.intArray));
+    // for (int i = 0; i < bint.intArray.length; i++){
+      //  bint.intArray[i] = Integer.parseInt(removeLeadingZeros(reverser(bint)).charAt(i)));
+     //}
+    // System.out.println("Bint array: " + Arrays.toString(bint.intArray));
+     if (this.intArray.length >= bint.intArray.length){
+       a = this.intArray;
+       b = bint.intArray;
+       totalA = new int[this.intArray.length];
+       for (int i = 0; i < bint.intArray.length; i++){
+          if (this.intArray[i] + bint.intArray[i] + carry >= 10){
+             totalA[i] = this.intArray[i] + bint.intArray[i] + carry - 10;
+             //System.out.println(" IF total: " + Arrays.toString(totalA) + " carry is: " + carry);
+             carry = 1;
           }
-          for (int i = removeLeadingZeros(bint).toString().length(); i < removeLeadingZeros(this).toString().length(); i++){
-             totalA[i] = this.intArray[i];
+          else{
+             totalA[i] = this.intArray[i] + bint.intArray[i] + carry;
+             //System.out.println(" ELSE total: " + Arrays.toString(totalA) + " carry is: " + carry);
+             carry = 0;
           }
+        }
+        for (int i = bint.intArray.length; i < this.intArray.length; i++){
+           totalA[i] = this.intArray[i] + carry;
+           if (this.intArray[i] + carry >= 10){
+              totalA[i] = this.intArray[i] + carry - 10;
+              carry = 1;
+           }
+           else{
+              carry = 0;
+           }
+        }
      }
-     else if (removeLeadingZeros(this).toString().length() < removeLeadingZeros(bint).toString().length()){
-         totalA = new int[bint.internalValue.length()];
-         for (int i = 0; i < removeLeadingZeros(this).toString().length(); i++){
+     else if (this.intArray.length < bint.intArray.length){
+         a = bint.intArray;
+         b = this.intArray;
+         totalA = new int[bint.intArray.length];
+         for (int i = 0; i < this.intArray.length; i++){
            if (bint.intArray[i] + this.intArray[i] + carry >= 10){
-              totalA[i] = bint.intArray[i] + this.intArray[i] + carry;
+              totalA[i] = bint.intArray[i] + this.intArray[i] + carry - 10;
+              //System.out.println("total: " + totalA + " carry is: " + carry);
               carry = 1;
            }
            else{
               totalA[i] = bint.intArray[i] + this.intArray[i] + carry;
+              //System.out.println("total: " + totalA + " carry is: " + carry);
               carry = 0;
            }
          }
-         for (int i = removeLeadingZeros(this).toString().length(); i < removeLeadingZeros(bint).toString().length(); i++){
-            totalA[i] = bint.intArray[i];
+         for (int i = this.intArray.length; i < bint.intArray.length; i++){
+           totalA[i] = this.intArray[i] + carry;
+           if (this.intArray[i] + carry >= 10){
+              totalA[i] = this.intArray[i] + carry - 10;
+              carry = 1;
+           }
+           else{
+              carry = 0;
+           }
          }
        }
        BrobInt sum = new BrobInt(Arrays.toString(totalA).substring(1, Arrays.toString(totalA).length()-1).replace(",","").replace(" ",""));
        return reverser(removeLeadingZeros(sum));
    }
+
 ////DID NOT UPDATE OTHER METHODS ON NEW ARRAYS!!!
   /** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
    *  Method to subtract the value of a BrobInt passed as argument to this BrobInt
@@ -184,45 +199,75 @@ public class BrobInt {
    public BrobInt subtract( BrobInt bint ) {
      int[] a = null;
      int[] b = null;
-     int[] c = null;
-     if (removeLeadingZeros(this).toString().length() >= removeLeadingZeros(bint).toString().length()){
-          a = reverser(removeLeadingZeros(this)).makeintArray();
-          b = reverser(removeLeadingZeros(bint)).makeintArray();
-          c = new int[removeLeadingZeros(this).toString().length()];
+     int[] totalA = null;
+     if (this.intArray.length >= bint.intArray.length){
+          a = this.intArray;
+          b = bint.intArray;
+          totalA = new int[this.intArray.length];
           for (int i = 0; i < b.length; i++){
              if (a[i]-b[i] <= 0){
-                a[i+1] = a[i-1] - 1;
-                a[i] = a[i] + 10;
-                c[i] = a[i] + b[i];
+                if(i+1 == a.length){
+                   totalA[i] = (b[i] - a[i]);
+                   sign = 1;
+                }
+                else if (a[i+1] == 0){
+                   a[2+i] = a[2+i] - 1;
+                   a[i+1] = a[i+1] + 9;
+                   totalA[i] = a[i] + 10 - b[i];
+                }
+                else{
+                   a[i+1] = a[i+1] - 1;
+                   totalA[i] = a[i] + 10 - b[i];
+                }
+                //totalA[i] = a[i] - b[i];
              }
              else{
-                c[i] = a[i] + b[i];
+                totalA[i] = a[i] - b[i];
              }
           }
           for (int i = b.length; i < a.length; i++){
-             c[i] = a[i];
+             totalA[i] = a[i];
           }
      }
-     else if (removeLeadingZeros(this).toString().length() < removeLeadingZeros(bint).toString().length()){
-         a = reverser(removeLeadingZeros(bint)).makeintArray();
-         b = reverser(removeLeadingZeros(this)).makeintArray();
-         c = new int[removeLeadingZeros(bint).toString().length()];
+     else if (this.intArray.length < bint.intArray.length){
+         a = bint.intArray;
+         b = this.intArray;
+         totalA = new int[bint.intArray.length];
          for (int i = 0; i < b.length; i++){
-            if (a[i]+b[i] >= 10){
-              a[i+1] = a[i-1] - 1;
-              a[i] = a[i] + 10;
-              c[i] = a[i] + b[i];
+            if (a[i]-b[i] <= 0){
+              if(i+1 == a.length){
+                 totalA[i] = (b[i] - a[i]);
+                 sign = 1;
+              }
+              else if (a[i+1] == 0){
+                 a[2+i] = a[2+i] - 1;
+                 a[i+1] = a[i+1] + 9;
+                 a[i] = a[i] + 10;
+              }
+              else{
+                 a[i+1] = a[i+1] - 1;
+                 a[i] = a[i] + 10;
+              }
+              totalA[i] = a[i] - b[i];
             }
             else{
-               c[i] = a[i] + b[i];
+               totalA[i] = a[i] - b[i];
             }
          }
          for (int i = b.length; i < a.length; i++){
-            c[i] = a[i];
+            totalA[i] = a[i];
          }
        }
-       BrobInt diff = new BrobInt(c.toString());
-       return reverser(diff);
+       if (sign == 1){
+          totalF = Arrays.copyOf(totalA, totalA.length + 1);
+          totalF[totalF.length - 1] = 1;
+          System.out.println("The 1 at the begging of your answer represents a negative sign");
+       }
+       else{
+          totalF = Arrays.copyOf(totalA, totalA.length);
+       }
+       BrobInt diff = new BrobInt(Arrays.toString(totalF).substring(1, Arrays.toString(totalF).length()-1).replace(",","").replace(" ",""));
+       return reverser(removeLeadingZeros(diff));
    }
 
   /** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -239,7 +284,7 @@ public class BrobInt {
    //}
    public BrobInt multiply( BrobInt bint ) {
       int m = Integer.valueOf(0); //check if this array is the correct way to add these
-      for (int i = 0; i < Integer.parseInt(removeLeadingZeros(this).toString()); i++){
+      for (int i = 0; i < (Integer.parseInt(removeLeadingZeros(this).toString())/2); i++){
          m += Integer.parseInt(bint.add(bint).toString());
       }
       BrobInt multiple = new BrobInt(Integer.toString(m));
@@ -452,6 +497,14 @@ public class BrobInt {
       BrobInt test1 = new BrobInt("100");
       BrobInt test2 = new BrobInt ("2");
       System.out.println("100 + 2: " + test1.add(test2));
+      System.out.println("100 - 2: " + test1.subtract(test2));
+      System.out.println("100 * 2: " + test1.multiply(test2));
+      //System.out.println("100 / 2: " + test1.divide(test2));
+      BrobInt test3 = new BrobInt("456");
+      BrobInt test4 = new BrobInt("789");
+      System.out.println("456 + 789: " + test3.add(test4));
+      System.out.println("456 - 789: " + test3.subtract(test4));
+      System.out.println("456 * 789: " + test3.multiply(test4));
 
       /**
 
