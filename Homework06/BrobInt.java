@@ -129,46 +129,48 @@ public class BrobInt {
    *  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
    public BrobInt add( BrobInt bint ) {
      int carry = 0;
-     int[] a = null;
-     int[] b = null;
-     int[] c = null;
+     int[] totalA = null;
+     this.intArray = new int[this.internalValue.length()];
+     bint.intArray = new int[bint.internalValue.length()];
+     for (int i = 0; i < removeLeadingZeros(this).toString().length(); i++){
+        this.intArray[i] = Integer.parseInt(Character.toString(reverser(this).reversed.charAt(i)));
+     }
+     for (int i = 0; i < removeLeadingZeros(bint).toString().length(); i++){
+        bint.intArray[i] = Integer.parseInt(Character.toString(reverser(bint).reversed.charAt(i)));
+     }
      if (removeLeadingZeros(this).toString().length() >= removeLeadingZeros(bint).toString().length()){
-          a = reverser(removeLeadingZeros(this)).makeintArray();
-          b = reverser(removeLeadingZeros(bint)).makeintArray();
-          c = new int[removeLeadingZeros(this).toString().length()];
-          for (int i = 0; i < b.length; i++){
-             if (a[i]+b[i]+carry >= 10){
-                c[i] = a[i] + b[i] + carry;
-                carry = a[i] + b[i] + carry - 9;
+          totalA = new int[this.internalValue.length()];
+          for (int i = 0; i < removeLeadingZeros(bint).toString().length(); i++){
+             if (this.intArray[i] + bint.intArray[i] + carry >= 10){
+                totalA[i] = this.intArray[i] + bint.intArray[i] + carry;
+                carry = 1;
              }
              else{
-                c[i] = a[i] + b[i] + carry;
+                totalA[i] = this.intArray[i] + bint.intArray[i] + carry;
                 carry = 0;
              }
           }
-          for (int i = b.length; i < a.length; i++){
-             c[i] = a[i];
+          for (int i = removeLeadingZeros(bint).toString().length(); i < removeLeadingZeros(this).toString().length(); i++){
+             totalA[i] = this.intArray[i];
           }
      }
      else if (removeLeadingZeros(this).toString().length() < removeLeadingZeros(bint).toString().length()){
-         a = reverser(removeLeadingZeros(bint)).makeintArray();
-         b = reverser(removeLeadingZeros(this)).makeintArray();
-         c = new int[removeLeadingZeros(bint).toString().length()];
-         for (int i = 0; i < b.length; i++){
-           if (a[i]+b[i]+carry >= 10){
-              c[i] = a[i] + b[i] + carry;
-              carry = a[i] + b[i] + carry - 9;
+         totalA = new int[bint.internalValue.length()];
+         for (int i = 0; i < removeLeadingZeros(this).toString().length(); i++){
+           if (bint.intArray[i] + this.intArray[i] + carry >= 10){
+              totalA[i] = bint.intArray[i] + this.intArray[i] + carry;
+              carry = 1;
            }
            else{
-              c[i] = a[i] + b[i] + carry;
+              totalA[i] = bint.intArray[i] + this.intArray[i] + carry;
               carry = 0;
            }
          }
-         for (int i = b.length; i < a.length; i++){
-            c[i] = a[i];
+         for (int i = removeLeadingZeros(this).toString().length(); i < removeLeadingZeros(bint).toString().length(); i++){
+            totalA[i] = bint.intArray[i];
          }
        }
-       BrobInt sum = new BrobInt(c.toString());
+       BrobInt sum = new BrobInt(totalA.toString());
        return reverser(sum);
    }
 
