@@ -114,7 +114,7 @@ public class BrobInt {
       intArray = new int[reversed.length()];
       for (int i = 0; i < reversed.length(); i++){
          System.out.println("reverse is: " + reversed);
-         intArray[i] = reversed.charAt(i) - 48;
+         intArray[i] = Integer.parseInt("" + reversed.charAt(i));
          System.out.println("int " + i + " is " + intArray[i]);
       }
       toArray(intArray);
@@ -445,6 +445,11 @@ public class BrobInt {
    *  NOTE:  we don't really care about these, since we test the BrobInt class with the BrobIntTester
    *  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
    public static void main( String[] args ) {
+      BrobInt test1 = new BrobInt("100");
+      BrobInt test2 = new BrobInt ("2");
+      System.out.println("100 + 2: " + test1.add(test2));
+
+      /**
 
       System.out.println( "\n  Hello, world, from the BrobInt program!!\n" );
       System.out.println( "\n   You should run your tests from the BrobIntTester, but here are a few...\n" );
@@ -472,7 +477,7 @@ public class BrobInt {
       try { System.out.println( "      expecting: true\n        and got: " + b1.equals( new BrobInt( "-99999" ) ) ); }
       catch( Exception e ) { System.out.println( "        Exception thrown:  " + e.toString() ); }
 
-      System.exit( 0 );
+      System.exit( 0 ); **/
 
    }
 }
