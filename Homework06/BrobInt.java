@@ -133,11 +133,13 @@ public class BrobInt {
      this.intArray = new int[this.internalValue.length()];
      bint.intArray = new int[bint.internalValue.length()];
      for (int i = 0; i < removeLeadingZeros(this).toString().length(); i++){
-        this.intArray[i] = Integer.parseInt(Character.toString(reverser(this).reversed.charAt(i)));
+        this.intArray[i] = Integer.parseInt(reverser(this).charAt(i));
      }
+     System.out.println("This array: " + Arrays.toString(this.intArray));
      for (int i = 0; i < removeLeadingZeros(bint).toString().length(); i++){
-        bint.intArray[i] = Integer.parseInt(Character.toString(reverser(bint).reversed.charAt(i)));
+        bint.intArray[i] = Integer.parseInt(Character.toString(reverser(bint).charAt(i)));
      }
+     System.out.println("Bint array: " + Arrays.toString(bint.intArray));
      if (removeLeadingZeros(this).toString().length() >= removeLeadingZeros(bint).toString().length()){
           totalA = new int[this.internalValue.length()];
           for (int i = 0; i < removeLeadingZeros(bint).toString().length(); i++){
@@ -170,8 +172,8 @@ public class BrobInt {
             totalA[i] = bint.intArray[i];
          }
        }
-       BrobInt sum = new BrobInt(totalA.toString());
-       return reverser(sum);
+       BrobInt sum = new BrobInt(Arrays.toString(totalA).substring(1, Arrays.toString(totalA).length()-1).replace(",","").replace(" ",""));
+       return reverser(removeLeadingZeros(sum));
    }
 ////DID NOT UPDATE OTHER METHODS ON NEW ARRAYS!!!
   /** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
