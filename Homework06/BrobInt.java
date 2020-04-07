@@ -14,6 +14,7 @@ import java.io.BufferedReader;
 import java.lang.StringBuffer;
 import java.io.InputStreamReader;
 import java.io.IOException;
+import java.lang.StringBuilder;
 
 public class BrobInt {
 
@@ -48,7 +49,7 @@ public class BrobInt {
    private static BufferedReader input = new BufferedReader( new InputStreamReader( System.in ) );
    private static final boolean DEBUG_ON = false;
    private static final boolean INFO_ON  = false;
-   private boolean willbeneg = false;
+   public boolean willbeneg = false;
 
   /**
    *  Constructor takes a string and assigns it to the internal storage, checks for a sign character
@@ -136,7 +137,7 @@ public class BrobInt {
      if (this.intArray.length >= bint.intArray.length){
        a = this.intArray;
        b = bint.intArray;
-       totalA = new int[this.intArray.length];
+       totalA = new int[this.intArray.length + 1];
        for (int i = 0; i < bint.intArray.length; i++){
           if (this.intArray[i] + bint.intArray[i] + carry >= 10){
              totalA[i] = this.intArray[i] + bint.intArray[i] + carry - 10;
@@ -149,21 +150,26 @@ public class BrobInt {
              carry = 0;
           }
         }
-        for (int i = bint.intArray.length; i < this.intArray.length; i++){
-           totalA[i] = this.intArray[i] + carry;
-           if (this.intArray[i] + carry >= 10){
-              totalA[i] = this.intArray[i] + carry - 10;
-              carry = 1;
+        for (int i = bint.intArray.length; i < totalA.length; i++){
+           if (i >= this.intArray.length){
+              totalA[i] = carry;
            }
            else{
-              carry = 0;
+              totalA[i] = this.intArray[i] + carry;
+              if (this.intArray[i] + carry >= 10){
+                 totalA[i] = this.intArray[i] + carry - 10;
+                 carry = 1;
+              }
+              else{
+                 carry = 0;
+              }
            }
         }
      }
      else if (this.intArray.length < bint.intArray.length){
          a = bint.intArray;
          b = this.intArray;
-         totalA = new int[bint.intArray.length];
+         totalA = new int[bint.intArray.length + 1];
          for (int i = 0; i < this.intArray.length; i++){
            if (bint.intArray[i] + this.intArray[i] + carry >= 10){
               totalA[i] = bint.intArray[i] + this.intArray[i] + carry - 10;
@@ -176,7 +182,7 @@ public class BrobInt {
               carry = 0;
            }
          }
-         for (int i = this.intArray.length; i < bint.intArray.length; i++){
+         for (int i = this.intArray.length; i <= bint.intArray.length; i++){
            totalA[i] = this.intArray[i] + carry;
            if (this.intArray[i] + carry >= 10){
               totalA[i] = this.intArray[i] + carry - 10;
@@ -207,7 +213,7 @@ public class BrobInt {
           totalA = new int[this.intArray.length];
           for (int i = 0; i < b.length; i++){
              if (a[i]-b[i] <= 0){
-                if(i+1 == a.length){
+                if((i+1 == a.length)&&((a[i]-b[i]) < 0)){
                    totalA[i] = (b[i] - a[i]);
                    willbeneg = true;
                 }
@@ -236,9 +242,10 @@ public class BrobInt {
          totalA = new int[bint.intArray.length];
          for (int i = 0; i < b.length; i++){
             if (a[i]-b[i] <= 0){
-              if(i+1 == a.length){
+              if((i+1 == a.length)&&((a[i]-b[i])<0)){
                  totalA[i] = (b[i] - a[i]);
                  willbeneg = true;
+                 System.out.println("Total is: " + Arrays.toString(totalA));
               }
               else if (a[i+1] == 0){
                  a[2+i] = a[2+i] - 1;
@@ -260,8 +267,10 @@ public class BrobInt {
          }
        }
        BrobInt diff = null;
-       if (willbeneg = true){
-          diff = new BrobInt("-" + Arrays.toString(totalA).substring(1, Arrays.toString(totalA).length()-1).replace(",","").replace(" ",""));
+       if (willbeneg){
+          String minus = "-";
+          diff = new BrobInt((Arrays.toString(totalA).substring(1, Arrays.toString(totalA).length()-1).replace(",","").replace(" ","") + minus).toString());
+          System.out.println("you have a negative");
        }
        else{
           diff = new BrobInt(Arrays.toString(totalA).substring(1, Arrays.toString(totalA).length()-1).replace(",","").replace(" ",""));
@@ -275,16 +284,16 @@ public class BrobInt {
    *  @return BrobInt that is the product of the value of this BrobInt and the one passed in
    *  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
    //public BrobInt multiply( BrobInt bint ) {
-  //    BrobInt total = new BrobInt();
-  //    for (BrobInt i = BrobInt.ZERO; i <= this; i.add(BrobInt.ONE)){
-  //       total.add(bint.add(bint));
-  //    }
-  //    return total;
+    //  BrobInt total = new BrobInt("0");
+    //  for (BrobInt i = BrobInt.ZERO; i.compareTo(bint) < 0; i = i.add(BrobInt.ONE)){
+    //     total = total.add(new BrobInt(this.toString()));
+    //  }
+    //  return total;
    //}
    public BrobInt multiply( BrobInt bint ) {
       int m = Integer.valueOf(0); //check if this array is the correct way to add these
-      for (int i = 0; i < (Integer.parseInt(removeLeadingZeros(this).toString())/2); i++){
-         m += Integer.parseInt(bint.add(bint).toString());
+      for (int i = 0; i < Integer.parseInt(removeLeadingZeros(this).toString()); i++){
+         m += Integer.parseInt(bint.add(BrobInt.ZERO).toString());
       }
       BrobInt multiple = new BrobInt(Integer.toString(m));
       return multiple;
@@ -299,12 +308,28 @@ public class BrobInt {
       //make an if that find bigger number
       //create a loop that divides bigger by smaller (count the number of loops) until total is less than the smaller #
       //stop the loop at this point and return the counter with the remainder total
+      /**
+      int i = 0;
+      starter = this.subtract(bint);
+      MIDD_LOOP:
+      for (i = 1; i < Integer.parseInt(this.toString()); i++){
+         container = starter.subtract(bint);
+         System.out.println("container is: " + container);
+         if(Integer.parseInt(container.toString()) < Integer.parseInt(bint.toString())){
+            break MIDD_LOOP;
+         }
+      }
+      total = i + ((Integer.parseInt(container.toString()))/Integer.parseInt(bint.toString()));
+      System.out.println("total is: " + i);
+      **/
       int c = 0;
       int total = 0;
-      for (int i = 1; i < Integer.parseInt(this.toString()); i++){
+      for (int i = 0; i < Integer.parseInt(this.toString()); i++){
           c = Integer.parseInt(this.subtract(bint).toString());
-          if (c <= Integer.parseInt(bint.toString())){
-              total = i + (c/Integer.parseInt(this.toString()));
+          System.out.println(c);
+          if (c < Integer.parseInt(bint.toString())){
+              total = i + (c/Integer.parseInt(bint.toString()));
+              System.out.println("total is: " + total);
               break;
           }
        }
