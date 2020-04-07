@@ -50,6 +50,7 @@ public class BrobInt {
    private static final boolean DEBUG_ON = false;
    private static final boolean INFO_ON  = false;
    public boolean willbeneg = false;
+   public boolean keepsign = false;
 
   /**
    *  Constructor takes a string and assigns it to the internal storage, checks for a sign character
@@ -58,7 +59,11 @@ public class BrobInt {
    *  @param  value  String value to make into a BrobInt
    */
    public BrobInt( String value ) {
-      if (value.charAt(0) == '+'){
+      if (keepsign){
+         this.internalValue = value;
+         System.out.println("Your answer should have a sign");
+      }
+      else if (value.charAt(0) == '+'){
          sign = 0;
          this.internalValue = value.substring(1);
       }
@@ -117,6 +122,22 @@ public class BrobInt {
       //return
    //}
    //this creates an integer array of the reversed BrobInt string
+
+   public BrobInt checksigns(String value){
+     if (value.charAt(0) == '+'){
+        sign = 0;
+        this.internalValue = value.substring(1);
+     }
+     else if (value.charAt(0) == '-'){
+        sign = 1;
+        this.internalValue = value.substring(1);
+     }
+     else{
+        this.internalValue = value;
+     }
+     BrobInt fix = new BrobInt(this.internalValue);
+     return fix;
+   }
 
   /** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
    *  Method to add the value of a BrobIntk passed as argument to this BrobInt
@@ -194,7 +215,7 @@ public class BrobInt {
          }
        }
        BrobInt sum = new BrobInt(Arrays.toString(totalA).substring(1, Arrays.toString(totalA).length()-1).replace(",","").replace(" ",""));
-       return reverser(removeLeadingZeros(sum));
+       return removeLeadingZeros(reverser(removeLeadingZeros(sum)));
    }
 
 ////DID NOT UPDATE OTHER METHODS ON NEW ARRAYS!!!
@@ -204,6 +225,7 @@ public class BrobInt {
    *  @return BrobInt that is the difference of the value of this BrobInt and the one passed in
    *  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
    public BrobInt subtract( BrobInt bint ) {
+
      int[] a = null;
      int[] b = null;
      int[] totalA = null;
@@ -216,6 +238,7 @@ public class BrobInt {
                 if((i+1 == a.length)&&((a[i]-b[i]) < 0)){
                    totalA[i] = (b[i] - a[i]);
                    willbeneg = true;
+                   keepsign = true;
                 }
                 else if (a[i+1] == 0){
                    a[2+i] = a[2+i] - 1;
@@ -245,6 +268,7 @@ public class BrobInt {
               if((i+1 == a.length)&&((a[i]-b[i])<0)){
                  totalA[i] = (b[i] - a[i]);
                  willbeneg = true;
+                 keepsign = true;
                  System.out.println("Total is: " + Arrays.toString(totalA));
               }
               else if (a[i+1] == 0){
@@ -269,13 +293,13 @@ public class BrobInt {
        BrobInt diff = null;
        if (willbeneg){
           String minus = "-";
-          diff = new BrobInt((Arrays.toString(totalA).substring(1, Arrays.toString(totalA).length()-1).replace(",","").replace(" ","") + minus).toString());
+          diff = new BrobInt((Arrays.toString(totalA).substring(1, Arrays.toString(totalA).length()-1).replace(",","").replace(" ","") + "-"));
           System.out.println("you have a negative");
        }
        else{
           diff = new BrobInt(Arrays.toString(totalA).substring(1, Arrays.toString(totalA).length()-1).replace(",","").replace(" ",""));
        }
-       return reverser(removeLeadingZeros(diff));
+       return removeLeadingZeros(reverser(diff));
    }
 
   /** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
