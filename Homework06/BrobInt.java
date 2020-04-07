@@ -59,22 +59,19 @@ public class BrobInt {
    *  @param  value  String value to make into a BrobInt
    */
    public BrobInt( String value ) {
-      if (keepsign){
-         this.internalValue = value;
-         System.out.println("Your answer should have a sign");
-      }
-      else if (value.charAt(0) == '+'){
+      internalValue = value;
+      reversed = new String(new StringBuffer(internalValue).reverse());
+      if (value.charAt(0) == '+'){
          sign = 0;
-         this.internalValue = value.substring(1);
+         reversed = reversed.substring(0, reversed.length() - 1);
       }
       else if (value.charAt(0) == '-'){
          sign = 1;
-         this.internalValue = value.substring(1);
+         reversed = reversed.substring(0, reversed.length() - 1);
       }
       else{
-         this.internalValue = value;
+         reversed = reversed;
       }
-      reversed = new String(new StringBuffer(internalValue).reverse());
       this.intArray = new int[reversed.length()];
       for (int i = 0; i < this.intArray.length; i++){
          this.intArray[i] = Character.digit(reversed.charAt(i), 10);
@@ -122,22 +119,6 @@ public class BrobInt {
       //return
    //}
    //this creates an integer array of the reversed BrobInt string
-
-   public BrobInt checksigns(String value){
-     if (value.charAt(0) == '+'){
-        sign = 0;
-        this.internalValue = value.substring(1);
-     }
-     else if (value.charAt(0) == '-'){
-        sign = 1;
-        this.internalValue = value.substring(1);
-     }
-     else{
-        this.internalValue = value;
-     }
-     BrobInt fix = new BrobInt(this.internalValue);
-     return fix;
-   }
 
   /** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
    *  Method to add the value of a BrobIntk passed as argument to this BrobInt
@@ -294,7 +275,6 @@ public class BrobInt {
        if (willbeneg){
           String minus = "-";
           diff = new BrobInt((Arrays.toString(totalA).substring(1, Arrays.toString(totalA).length()-1).replace(",","").replace(" ","") + "-"));
-          System.out.println("you have a negative");
        }
        else{
           diff = new BrobInt(Arrays.toString(totalA).substring(1, Arrays.toString(totalA).length()-1).replace(",","").replace(" ",""));
@@ -345,20 +325,37 @@ public class BrobInt {
       }
       total = i + ((Integer.parseInt(container.toString()))/Integer.parseInt(bint.toString()));
       System.out.println("total is: " + i);
-      **/
+
       int c = 0;
       int total = 0;
       for (int i = 0; i < Integer.parseInt(this.toString()); i++){
           c = Integer.parseInt(this.subtract(bint).toString());
           System.out.println(c);
           if (c < Integer.parseInt(bint.toString())){
-              total = i + (c/Integer.parseInt(bint.toString()));
+              total = i + 1 + (c/Integer.parseInt(bint.toString()));
               System.out.println("total is: " + total);
               break;
           }
-       }
-       BrobInt div = new BrobInt(Integer.toString(total));
-       return div;
+       }**/
+       /**
+       for (int i = 1; i < Integer.parseInt(this.toString()); i++){
+           c = Integer.parseInt(this.subtract(bint).toString());
+           if (c <= Integer.parseInt(bint.toString())){
+               r = i;
+               break;
+           }
+        }**/
+        int thisint = Integer.parseInt(this.toString());
+        int bintint = Integer.parseInt(bint.toString());
+        int count = 0;
+        int total = 0;
+
+        while (thisint >= bintint){
+           thisint = thisint-bintint;
+           count++;
+        }
+        BrobInt div = new BrobInt(String.valueOf(count));
+        return div;
    }
 
   /** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -367,17 +364,23 @@ public class BrobInt {
    *  @return BrobInt that is the remainder of division of this BrobInt by the one passed in
    *  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
    public BrobInt remainder( BrobInt bint ) {
-     int r = 0;
-     int c = 0;
-     for (int i = 1; i < Integer.parseInt(this.toString()); i++){
-         c = Integer.parseInt(this.subtract(bint).toString());
-         if (c <= Integer.parseInt(bint.toString())){
-             r = i;
-             break;
-         }
-      }
-      BrobInt rem = new BrobInt(Integer.toString(r));
-      return rem;
+     int thisint = Integer.parseInt(this.toString());
+     int bintint = Integer.parseInt(bint.toString());
+     int count = 0;
+     int extra = 0;
+
+     while (thisint >= bintint){
+        thisint = thisint-bintint;
+        count++;
+     }
+     if (thisint < bintint || thisint > 0){
+        extra = thisint;
+     }
+     else{
+        extra = 0;
+     }
+     BrobInt rem = new BrobInt(Integer.toString(extra));
+     return rem;
    }
 
   /** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -547,12 +550,16 @@ public class BrobInt {
       System.out.println("100 + 2: " + test1.add(test2));
       System.out.println("100 - 2: " + test1.subtract(test2));
       System.out.println("100 * 2: " + test1.multiply(test2));
-      //System.out.println("100 / 2: " + test1.divide(test2));
+      System.out.println("100 / 2: " + test1.divide(test2));
       BrobInt test3 = new BrobInt("456");
       BrobInt test4 = new BrobInt("789");
       System.out.println("456 + 789: " + test3.add(test4));
       System.out.println("456 - 789: " + test3.subtract(test4));
       System.out.println("456 * 789: " + test3.multiply(test4));
+      System.out.println("789 / 456: " + test4.divide(test3));
+      System.out.println("789 % 456: " + test4.remainder(test3));
+      BrobInt test9 = new BrobInt("9");
+      System.out.println("9 % 2: " + test9.remainder(test2));
 
       /**
 
