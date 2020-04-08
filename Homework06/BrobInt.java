@@ -140,7 +140,7 @@ public class BrobInt {
         }
         return this.subtract(bint);
      }
-     else if (this.sign == 1 && bint.sign ==1){
+     else if (this.sign == 1 && bint.sign == 1){
         bint.sign = 0;
         this.sign = 0;
         keepsign = true;
@@ -227,28 +227,31 @@ public class BrobInt {
      BrobInt diff = null;
 
      if(this.sign == 1 && bint.sign == 0){
-        this.sign = 0;
         if (this.compareTo(bint) > 0){
            willbeneg = true;
+           bint.sign = 1;
         }
         else{
            willbeneg = false;
+           this.sign = 0;
         }
         return this.add(bint);
      }
      else if(this.sign == 0 && bint.sign == 1){
-        bint.sign = 0;
         if (this.compareTo(bint) > 0){
            willbeneg = true;
+           this.sign = 1;
         }
         else{
            willbeneg = false;
+           bint.sign = 0;
         }
         return this.add(bint);
      }
      else if (this.sign == 1 && bint.sign ==1){
         bint.sign = 0;
         this.sign = 0;
+        willbeneg = true;
         return this.add(bint);
      }
      else if (this.intArray.length >= bint.intArray.length){
@@ -325,11 +328,26 @@ public class BrobInt {
    *  @return BrobInt that is the product of the value of this BrobInt and the one passed in
    *  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
    public BrobInt multiply( BrobInt bint ) {
-      int m = Integer.valueOf(0); //check if this array is the correct way to add these
+      boolean isneg = false;
+      BrobInt multiple = null;
+      if (this.sign == 0 && bint.sign == 1){
+         isneg = true;
+         bint.sign = 0;
+      }
+      else if (this.sign == 1 && bint.sign == 0){
+         isneg = true;
+         this.sign = 0;
+      }
+      int m = Integer.valueOf(0);
       for (int i = 0; i < Integer.parseInt(removeLeadingZeros(this).toString()); i++){
          m += Integer.parseInt(bint.add(BrobInt.ZERO).toString());
       }
-      BrobInt multiple = new BrobInt(Integer.toString(m));
+      if (isneg){
+         multiple = new BrobInt("-" + Integer.toString(m));
+      }
+      else{
+         multiple = new BrobInt(Integer.toString(m));
+      }
       return multiple;
    }
 
@@ -339,16 +357,46 @@ public class BrobInt {
    *  @return BrobInt that is the dividend of this BrobInt divided by the one passed in
    *  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
    public BrobInt divide( BrobInt bint ) {
-        int thisint = Integer.parseInt(this.toString());
-        int bintint = Integer.parseInt(bint.toString());
+        int thisint = 0;
+        int bintint = 0;
         int count = 0;
-        int total = 0;
+        boolean negcheck = false;
+        BrobInt div = null;
+
+        if(this.sign == 1 && bint.sign == 0){
+           this.sign = 0;
+           negcheck = true;
+           thisint = Integer.parseInt(this.toString().substring(0,this.toString().length()-1));
+           bintint = Integer.parseInt(bint.toString());
+        }
+        else if(this.sign == 0 && bint.sign == 1){
+           bint.sign = 0;
+           negcheck = true;
+           bintint = Integer.parseInt(bint.toString().substring(0,bint.toString().length()-1));
+           thisint = Integer.parseInt(this.toString());
+        }
+        else if(this.sign == 1 && bint.sign == 1){
+           this.sign = 0;
+           bint.sign = 0;
+           negcheck = true;
+           bintint = Integer.parseInt(bint.toString());
+           thisint = Integer.parseInt(this.toString());
+        }
+        else{
+          bintint = Integer.parseInt(bint.toString());
+          thisint = Integer.parseInt(this.toString());
+        }
 
         while (thisint >= bintint){
            thisint = thisint-bintint;
            count++;
         }
-        BrobInt div = new BrobInt(String.valueOf(count));
+        if (negcheck){
+           div = new BrobInt("-" + String.valueOf(count));
+        }
+        else{
+           div = new BrobInt(String.valueOf(count));
+        }
         return div;
    }
 
@@ -543,9 +591,9 @@ public class BrobInt {
       BrobInt test1 = new BrobInt("-100");
       BrobInt test2 = new BrobInt ("2");
       System.out.println("-100 + 2: " + test1.add(test2));
-      //System.out.println("100 - 2: " + test1.subtract(test2));
-      //System.out.println("100 * 2: " + test1.multiply(test2));
-      //System.out.println("100 / 2: " + test1.divide(test2));
+      System.out.println("-100 - 2: " + test1.subtract(test2));
+      System.out.println("100 * 2: " + test1.multiply(test2));
+      System.out.println("100 / 2: " + test1.divide(test2));
       BrobInt test3 = new BrobInt("456");
       BrobInt test4 = new BrobInt("789");
       System.out.println("456 + 789: " + test3.add(test4));
