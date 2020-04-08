@@ -592,8 +592,8 @@ public class BrobInt {
       BrobInt test2 = new BrobInt ("2");
       System.out.println("-100 + 2: " + test1.add(test2));
       System.out.println("-100 - 2: " + test1.subtract(test2));
-      System.out.println("100 * 2: " + test1.multiply(test2));
-      System.out.println("100 / 2: " + test1.divide(test2));
+      System.out.println("-100 * 2: " + test1.multiply(test2));
+      System.out.println("-100 / 2: " + test1.divide(test2));
       BrobInt test3 = new BrobInt("456");
       BrobInt test4 = new BrobInt("789");
       System.out.println("456 + 789: " + test3.add(test4));
