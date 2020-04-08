@@ -2,7 +2,7 @@
  * File name  :  BrobInt.java
  * Purpose    :  Learning exercise to implement arbitrarily large numbers and their operations
  * @author    :  Summer McGrogan
- * Date       :  2017-04-04
+ * Date       :  2020-04-07
  * Description:  @see <a href='http://bjohnson.lmu.build/cmsi186web/homework06.html'>Assignment Page</a>
  * Notes      :  None
  * Warnings   :  None
@@ -227,24 +227,22 @@ public class BrobInt {
      BrobInt diff = null;
 
      if(this.sign == 1 && bint.sign == 0){
+        this.sign = 0;
         if (this.compareTo(bint) > 0){
            willbeneg = true;
-           bint.sign = 1;
         }
         else{
            willbeneg = false;
-           this.sign = 0;
         }
         return this.add(bint);
      }
      else if(this.sign == 0 && bint.sign == 1){
+        bint.sign = 0;
         if (this.compareTo(bint) > 0){
            willbeneg = true;
-           this.sign = 1;
         }
         else{
            willbeneg = false;
-           bint.sign = 0;
         }
         return this.add(bint);
      }
@@ -263,6 +261,9 @@ public class BrobInt {
                 if((i+1 == a.length)&&((a[i]-b[i]) < 0)){
                    totalA[i] = (b[i] - a[i]);
                    willbeneg = true;
+                }
+                else if((a[i]-b[i] < 0) && (this.intArray.length == bint.intArray.length)){
+                   totalA[i] = -1*(a[i] - b[i]);
                 }
                 else if (a[i+1] == 0){
                    a[2+i] = a[2+i] - 1;
