@@ -3,9 +3,8 @@
  * purpose : Estimates the probability that, among n randomly-chosen people,
  *             there is at least one duplicated birthdate
  * <p>
- * @author : Phil Dorin
- * @author : re-hosted by B.J. Johnson
- * @since  : 2020-04-09
+ * @author : Summer McGrogan
+ * @since  : 2020-04-18
  * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 
 import java.text.DecimalFormat;
@@ -83,6 +82,7 @@ public class BirthdaySolver {
 
      if(!args[1].equals(null)){
         nTests = DEFAULT_NUMBER_OF_EXPERIMENTS;
+        System.out.println("\n You did not enter a valid argument for number of experiments, \n default value is 100,000");
      } //else if(Number.isInteger(args[1])){
     //    nTests = Integer.parseInt(args[1]);
      //}
@@ -98,7 +98,7 @@ public class BirthdaySolver {
 
      // notify the user that we're starting and let 'em know if it's gonna be looooooong
 
-     System.out.println("Counter initialized. \n Starting algorithm calculation....\n this will take a moment.");
+     System.out.println(" \n Counter initialized. \n Starting algorithm calculation....\n This will take a moment.");
 
      // actual programming loop; note the internal try/catch
      //  this loop runs "n" experiments, and counts whenever there is a duplicate
