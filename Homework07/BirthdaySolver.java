@@ -26,14 +26,6 @@ public class BirthdaySolver {
    private static final boolean DEBUG_ON = false;        // set to false for release
 
   /**
-   * Informs the user of the correct way to run the program when they have made an entry error.
-   *   It also exits the program, assuming that the user error will cause an un-runnable condition.
-   */
-   public void printUsage() {
-      // you finish this!
-   }
-
-  /**
    * Calculates the actual probability that from a certain number of people, at least two of them
    *  share the same birthday.  Based on calculating the probability that they DO NOT share a
    *  birthday, then subtracting that probability from 1.0 to get the other side of the coin.
