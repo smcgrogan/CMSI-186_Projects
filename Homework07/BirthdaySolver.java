@@ -3,13 +3,15 @@
  * purpose : Estimates the probability that, among n randomly-chosen people,
  *             there is at least one duplicated birthdate
  * <p>
- * @author : Summer McGrogan
- * @since  : 2020-04-18
+ * @author : Phil Dorin
+ * @author : re-hosted by B.J. Johnson
+ * @since  : 2020-04-09
  * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 
 import java.text.DecimalFormat;
 import java.lang.NumberFormatException;
 import java.util.Random;
+import java.lang.ArrayIndexOutOfBoundsException;
 
 /**
  * Finds the probability that in a set of people there will be two who share the same birthday.
@@ -61,6 +63,7 @@ public class BirthdaySolver {
    *
    * @param args two are used: [0] = number of people; [1] = number of experiments.
    * @throws NumberFormatException if args[0] is not an actual integer.
+   * //@throws ArrayIndexOutOfBoundsException if no arguments entered.
    */
    public static void main ( String [] args ) {
 
@@ -72,25 +75,42 @@ public class BirthdaySolver {
       int nTests = 0;
 
      // check the arguments
-
+     /**
      try{
         npeople = Integer.parseInt(args[0]);
-        System.out.println(" \n Valid number of people \n");
-     }catch(NumberFormatException e){
-        System.out.println("\n Not a valid number of people! \n");
+     } catch (ArrayIndexOutOfBoundsException a){
+        System.out.println( a.toString() );
+        System.exit(0);
+     } **/
+     
+     if (args[0] == null){
+        System.out.println("You must enter arguments");
+        System.exit(0);
      }
 
-     if(!args[1].equals(null)){
-        nTests = DEFAULT_NUMBER_OF_EXPERIMENTS;
-        System.out.println("\n You did not enter a valid argument for number of experiments, \n default value is 100,000");
-     } //else if(Number.isInteger(args[1])){
-    //    nTests = Integer.parseInt(args[1]);
-     //}
-     try{
-        nTests = Integer.parseInt(args[1]);
-     }catch(NumberFormatException e){
-        nTests = DEFAULT_NUMBER_OF_EXPERIMENTS;
+     else{
+       try{
+          npeople = Integer.parseInt(args[0]);
+          System.out.println(" \n Valid number of people \n");
+       }catch(NumberFormatException e){
+          System.out.println("\n Not a valid number of people!!!! \n" + e.toString());
+          System.exit(0);
+       }
+
+        if(args.length == 1){
+           nTests = DEFAULT_NUMBER_OF_EXPERIMENTS;
+           System.out.println("\n You did not enter a valid argument for number of experiments, \n default value is 100,000");
+        }
+        else if (args.length == 2){
+          try{
+             nTests = Integer.parseInt(args[1]);
+          }catch(NumberFormatException e){
+             nTests = DEFAULT_NUMBER_OF_EXPERIMENTS;
+             System.out.println( e.toString() );
+          }
+        }
      }
+
 
      // declare and initialize the duplicates counter
 
@@ -122,24 +142,6 @@ public class BirthdaySolver {
      }
 
      approX = (duplicates/nTests) * 100;
-
-     //b.calculateActualProbability(npeople);
-     //System.out.println("The actual probability is: " + b.calculateActualProbability(npeople));
-
-     // SOME SORT OF LOOP GOES HERE
-
-        // note that the try/catch block is NOT really used for program errors here;
-        //  it simply flags that there is a duplicate birthday at that index so as
-        //  to provide an increment for the count
-         try {
-
-           // SOME SORT OF LOOP GOES HERE, TOO
-
-         }
-         catch ( Exception e ) {
-            if( DEBUG_ON ) { System.out.println( e.toString() ); }
-            // INCREMENT THE COUNT
-         }
 
      // done with the loop, now find the average probability by simple division
       System.out.println( "   Probability that two out of " + npeople + " people have the same birthday: " );
