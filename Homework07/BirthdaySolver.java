@@ -3,9 +3,8 @@
  * purpose : Estimates the probability that, among n randomly-chosen people,
  *             there is at least one duplicated birthdate
  * <p>
- * @author : Phil Dorin
- * @author : re-hosted by B.J. Johnson
- * @since  : 2020-04-09
+ * @author : Summer McGrogan
+ * @since  : 2020-04-19
  * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 
 import java.text.DecimalFormat;
@@ -63,7 +62,7 @@ public class BirthdaySolver {
    *
    * @param args two are used: [0] = number of people; [1] = number of experiments.
    * @throws NumberFormatException if args[0] is not an actual integer.
-   * //@throws ArrayIndexOutOfBoundsException if no arguments entered.
+   * @throws ArrayIndexOutOfBoundsException if no arguments entered.
    */
    public static void main ( String [] args ) {
 
@@ -73,43 +72,41 @@ public class BirthdaySolver {
       double approX = 0.0;
       int npeople = 0;
       int nTests = 0;
+      String s = "";
 
      // check the arguments
-     /**
+
      try{
-        npeople = Integer.parseInt(args[0]);
+        if (args.length > 0){
+           System.out.println("Valid number of args entered");
+        }
      } catch (ArrayIndexOutOfBoundsException a){
-        System.out.println( a.toString() );
-        System.exit(0);
-     } **/
-     
-     if (args[0] == null){
-        System.out.println("You must enter arguments");
+        System.out.println( " \n Must enter arguments!!! \n" + a.toString() );
         System.exit(0);
      }
 
-     else{
+
+     try{
+       npeople = Integer.parseInt(args[0]);
+       System.out.println(" \n Valid number of people \n");
+     }catch(NumberFormatException e){
+       System.out.println("\n Not a valid number of people!!!! \n" + e.toString());
+       System.exit(0);
+     }
+
+     if(args.length == 1){
+         nTests = DEFAULT_NUMBER_OF_EXPERIMENTS;
+         System.out.println("\n You did not enter a valid argument for number of experiments, \n default value is 100,000");
+     }
+     else if (args.length == 2){
        try{
-          npeople = Integer.parseInt(args[0]);
-          System.out.println(" \n Valid number of people \n");
+           nTests = Integer.parseInt(args[1]);
        }catch(NumberFormatException e){
-          System.out.println("\n Not a valid number of people!!!! \n" + e.toString());
-          System.exit(0);
-       }
-
-        if(args.length == 1){
            nTests = DEFAULT_NUMBER_OF_EXPERIMENTS;
-           System.out.println("\n You did not enter a valid argument for number of experiments, \n default value is 100,000");
-        }
-        else if (args.length == 2){
-          try{
-             nTests = Integer.parseInt(args[1]);
-          }catch(NumberFormatException e){
-             nTests = DEFAULT_NUMBER_OF_EXPERIMENTS;
-             System.out.println( e.toString() );
-          }
-        }
+           System.out.println( e.toString() );
+       }
      }
+
 
 
      // declare and initialize the duplicates counter
