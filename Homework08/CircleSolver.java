@@ -12,6 +12,8 @@
  * 5. Your program must output whether the circles intersect, and at how many points they meet. If they meet at more than one point, just state that fact.
  * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 
+//STILL NEED TO SAY IF THEY MEET AT ONE POINT OR MORE THAN ONE PT
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -59,7 +61,7 @@ public class CircleSolver {
 
       if(circle1 != null){
          circleA1 = circle1.split(" ");
-         System.out.println("Splitting...");
+         System.out.println("Splitting Circle 1...");
       }
       else{
          System.out.println("First line of file is empty!!");
@@ -100,7 +102,7 @@ public class CircleSolver {
 
        if(circle2 != null){
           circleA2 = circle2.split(" ");
-          System.out.println("Splitting1...");
+          System.out.println("Splitting Circle 2...");
        }
        else{
           System.out.println("Second line of file is empty!!");
@@ -129,6 +131,18 @@ public class CircleSolver {
         String output = "\nX Coordinate: " + circle[0] + " Y Coordinate: " + circle[1] + "\nRadius: " + circle[2];
         return output;
      }
+
+     /**
+      * Reads a file that contains a description of Circle2
+      *
+      * @param X1 String that contains the name of the file; file is assumed to be
+      *           in the same directory as the program which calls this method
+      * @return
+      */
+      public double calcDistance(float X1, float X2, float y1, float y2){
+         double distance = Math.sqrt(Math.pow(X2 - X1, 2) + Math.pow(y2 - y1, 2));
+         return distance;
+      }
 
 
 
@@ -184,47 +198,81 @@ public class CircleSolver {
 
 
 
-      if((cs.circleC1[2] + cs.circleC2[2]) == (Math.sqrt(Math.pow(X2_coords - X1_coords, 2) + Math.pow(Y2_coords - Y1_coords, 2)))){
+      if((cs.circleC1[2] + cs.circleC2[2] - (Math.sqrt(Math.pow(cs.circleC2[0] - cs.circleC1[0], 2) + Math.pow(cs.circleC2[1] - cs.circleC1[1], 2)))) == 0){
          System.out.println("Your Circles Touch! \n");
       }
-      //One circle is inside the other
-      if((cs.circleC1[2] + cs.circleC2[2]) >= (Math.sqrt(Math.pow(X2_coords - X1_coords, 2) + Math.pow(Y2_coords - Y1_coords, 2)))){
-         if(cs.circleC1[2] > cs.circleC2[2]){
-            //Circle 1 has bigger nadius
-            //testing if one circle is inside the other
-            if((cs.circleC1[2]) > (cs.circleC2[2] + (Math.sqrt(Math.pow(X2_coords - X1_coords, 2) + Math.pow(Y2_coords - Y1_coords, 2))))){
-               //testing if one circle is touching inside
-               if((cs.circleC1[2] - cs.circleC2[2]) < (Math.sqrt(Math.pow(X2_coords - X1_coords, 2) + Math.pow(Y2_coords - Y1_coords, 2)))){
-                  System.out.println("One circle is inside the other and crossing!");
-               }
-               else if((cs.circleC1[2] - cs.circleC2[2]) == (Math.sqrt(Math.pow(X2_coords - X1_coords, 2) + Math.pow(Y2_coords - Y1_coords, 2)))){
-                  System.out.println("One circle is inside the other and touching!");
-               }
+
+      //Circle inside and touching
+      if((cs.circleC1[2] - cs.circleC2[2]) > 0){
+         //Circle 1 has bigger radius
+         //testing if one circle is inside the other
+         //int insidetest1 = Integer.parseInt((cs.circleC1[2]) - (cs.circleC2[2] + (Math.sqrt(Math.pow(cs.circleC2[0] - cs.circleC1[0], 2) + Math.pow(cs.circleC2[1] - cs.circleC1[1], 2)))));
+         if((cs.circleC1[2] - cs.circleC2[2] - (Math.sqrt(Math.pow(cs.circleC2[0] - cs.circleC1[0], 2) + Math.pow(cs.circleC2[1] - cs.circleC1[1], 2)))) >= 0){
+            //testing if one circle is touching inside
+            //int insidetouch1 = Integer.parseInt((cs.circleC1[2] - cs.circleC2[2]) - (Math.sqrt(Math.pow(cs.circleC2[0] - cs.circleC1[0], 2) + Math.pow(cs.circleC2[1] - cs.circleC1[1], 2))));
+            if((cs.circleC1[2] - cs.circleC2[2] - (Math.sqrt(Math.pow(cs.circleC2[0] - cs.circleC1[0], 2) + Math.pow(cs.circleC2[1] - cs.circleC1[1], 2)))) < 0){
+               System.out.println("One circle is inside the other and meet at more than 1 point (crossing)!");
             }
-            else{
-               System.out.println("One circle is inside the other (not touching or crossing)!");
+            else if((cs.circleC1[2] - cs.circleC2[2] - (Math.sqrt(Math.pow(cs.circleC2[0] - cs.circleC1[0], 2) + Math.pow(cs.circleC2[1] - cs.circleC1[1], 2)))) == 0){
+               System.out.println("One circle is inside the other and touch at 1 point!");
             }
-          }
-          else if(cs.circleC1[2] < cs.circleC2[2]){
-            //Circle 2 has bigger nadius
-            //testing if one circle is inside the other
-            if((cs.circleC2[2]) > (cs.circleC1[2] + (Math.sqrt(Math.pow(X2_coords - X1_coords, 2) + Math.pow(Y2_coords - Y1_coords, 2))))){
-               //testing if one circle is touching inside
-               if ((cs.circleC2[2] - cs.circleC1[2]) <= (Math.sqrt(Math.pow(X2_coords - X1_coords, 2) + Math.pow(Y2_coords - Y1_coords, 2)))){
-                  System.out.println("One circle is inside the other and crossing!");
-               }
-               else if ((cs.circleC2[2] - cs.circleC1[2]) == (Math.sqrt(Math.pow(X2_coords - X1_coords, 2) + Math.pow(Y2_coords - Y1_coords, 2)))){
-                  System.out.println("One circle is inside the other and touching!");
-               }
-            }
-            else{
+            else if((cs.circleC1[2] - cs.circleC2[2] - (Math.sqrt(Math.pow(cs.circleC2[0] - cs.circleC1[0], 2) + Math.pow(cs.circleC2[1] - cs.circleC1[1], 2)))) >= 0){
                System.out.println("One circle is inside the other (not touching or crossing)!");
             }
          }
-      }
-      if((X1_coords - X2_coords) == 0){
-         if((Y1_coords - Y2_coords) == 0){
-           if((R1_coords - R2_coords) == 0){
+         System.exit(0);
+       }
+       else if((cs.circleC1[2] - cs.circleC2[2]) < 0){
+         //Circle 2 has bigger radius
+         //testing if one circle is inside the other
+         if((cs.circleC2[2] + cs.circleC1[2] - (Math.sqrt(Math.pow(cs.circleC2[0] - cs.circleC1[0], 2) + Math.pow(cs.circleC2[1] - cs.circleC1[1], 2)))) >= 0){
+            //testing if one circle is touching inside
+            if ((cs.circleC2[2] - cs.circleC1[2] - (Math.sqrt(Math.pow(cs.circleC2[0] - cs.circleC1[0], 2) + Math.pow(cs.circleC2[1] - cs.circleC1[1], 2)))) < 0){
+               System.out.println("One circle is inside the other and touch at 2 points (crossing)!");
+            }
+            else if((cs.circleC2[2] - cs.circleC1[2] - (Math.sqrt(Math.pow(cs.circleC2[0] - cs.circleC1[0], 2) + Math.pow(cs.circleC2[1] - cs.circleC1[1], 2)))) == 0){
+               System.out.println("One circle is inside the other and touch at 1 point!");
+            }
+            else if((cs.circleC2[2] - cs.circleC1[2] - (Math.sqrt(Math.pow(cs.circleC2[0] - cs.circleC1[0], 2) + Math.pow(cs.circleC2[1] - cs.circleC1[1], 2)))) >= 0){
+               System.out.println("One circle is inside the other (not touching or crossing)!");
+            }
+          }
+          System.exit(0);
+        }
+
+        //Circles Touching
+        if((cs.circleC1[2] - cs.circleC2[2]) > 0){
+          if((cs.circleC1[2] + cs.circleC2[2] - (Math.sqrt(Math.pow(cs.circleC2[0] - cs.circleC1[0], 2) + Math.pow(cs.circleC2[1] - cs.circleC1[1], 2)))) > 0){
+             System.out.println("The circles touch at 2 points (crossing)!!");
+          }
+          else if((cs.circleC1[2] + cs.circleC2[2] - (Math.sqrt(Math.pow(cs.circleC2[0] - cs.circleC1[0], 2) + Math.pow(cs.circleC2[1] - cs.circleC1[1], 2)))) <= 0){
+             System.out.println("The circles touch at 1 point (crossing)!");
+          }
+        }
+        else if((cs.circleC2[2] - cs.circleC1[2]) > 0){
+          if ((cs.circleC2[2] + cs.circleC1[2] - (Math.sqrt(Math.pow(cs.circleC2[0] - cs.circleC1[0], 2) + Math.pow(cs.circleC2[1] - cs.circleC1[1], 2)))) > 0){
+             System.out.println("The circles touch at 2 points!");
+          }
+          else if((cs.circleC2[2] + cs.circleC1[2] - (Math.sqrt(Math.pow(cs.circleC2[0] - cs.circleC1[0], 2) + Math.pow(cs.circleC2[1] - cs.circleC1[1], 2)))) <= 0){
+             System.out.println("The circles touch at 1 point!");
+          }
+        }
+
+
+
+      //One circle is inside the other
+      //Integer insidetest = Integer.parseInt((cs.circleC1[2] + cs.circleC2[2]) - cs.calcDistance(X1_coords, X2_coords, Y1_coords, Y2_coords));
+      //if((cs.circleC1[2] + cs.circleC2[2] - (Math.sqrt(Math.pow(cs.circleC2[0] - cs.circleC1[0], 2) + Math.pow(cs.circleC2[1] - cs.circleC1[1], 2)))) > 0){
+         //int biggertest = Integer.parseInt(cs.circleC1[2] - cs.circleC2[2]);
+         ///HEREE
+            //else{
+               //System.out.println("One circle is inside the other (not touching or crossing)!");
+            //}
+         //}
+      //}
+      if((cs.circleC1[0] - cs.circleC2[0]) == 0){
+         if((cs.circleC1[1] - cs.circleC2[1]) == 0){
+           if((cs.circleC1[2] - cs.circleC2[2]) == 0){
              System.out.println("One circle is on top of the other!!");
            }
          }
