@@ -58,14 +58,15 @@ public class CircleSolver {
 
       String circle1 = br.readLine();
 
+      if(circle1.length() == 0){
+        System.out.println("First line of file is empty!! Enter Numbers...");
+        System.exit(0);
+      }
+
 
       if(circle1 != null){
          circleA1 = circle1.split(" ");
          //System.out.println("Splitting Circle 1...");
-      }
-      else{
-         System.out.println("First line of file is empty!!");
-         System.exit(0);
       }
 
 
@@ -75,7 +76,8 @@ public class CircleSolver {
            circleC1[i] = Integer.parseInt(circleA1[i]);
         }
       } catch (NumberFormatException e){
-          System.out.println("All values must be numbers!");
+          System.out.println("All values must be numbers! Enter Numbers!");
+          System.exit(0);
       }
       return circleC1;
    }
@@ -100,13 +102,14 @@ public class CircleSolver {
 
        String circle2 = br.readLine();
 
+       if(circle2.length() == 0){
+         System.out.println("Second line of file is empty!! Enter Numbers...");
+         System.exit(0);
+       }
+
        if(circle2 != null){
           circleA2 = circle2.split(" ");
           //System.out.println("Splitting Circle 2...");
-       }
-       else{
-          System.out.println("Second line of file is empty!!");
-          System.exit(0);
        }
 
 
@@ -115,7 +118,8 @@ public class CircleSolver {
             circleC2[i] = Integer.parseInt(circleA2[i]);
          }
        } catch (NumberFormatException e){
-          System.out.println("All values must be numbers!");
+          System.out.println("All values must be numbers! Enter Numbers!!!!");
+          System.exit(0);
        }
 
        return circleC2;
@@ -133,13 +137,15 @@ public class CircleSolver {
    */
    public static void main( String [] args ) {
 
+
       CircleSolver cs = new CircleSolver();
+      String fileEntered = args[0];
 
       System.out.println( "\n   Lets do this! \n\n" );
 
       try{
-        cs.coordsCircle1( "CirclesInside.txt" );
-        cs.coordsCircle2( "CirclesInside.txt" );
+        cs.coordsCircle1( fileEntered );
+        cs.coordsCircle2( fileEntered );
       }
       catch( IOException ioe ) {
          System.out.println( "\n   Error on open/read... exiting\n" );
