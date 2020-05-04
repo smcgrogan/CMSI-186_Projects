@@ -121,10 +121,8 @@ public class BinaryClockSolver {
      String appender3 = "";
 
      for(int i = 0; i < 2; i++){
-        System.out.println("appender: " + appender);
         appender += (argus.charAt(i));
      }
-     System.out.println("Hours: " + appender);
 
      int clockH = Integer.parseInt(appender.toString());
 
@@ -148,7 +146,7 @@ public class BinaryClockSolver {
         System.exit(0);
      }
      if(clockS > 59){
-        System.out.println("\n You have entered a minute that is too high, try again.");
+        System.out.println("\n You have entered a second that is too high, try again.");
         System.exit(0);
      }
 
