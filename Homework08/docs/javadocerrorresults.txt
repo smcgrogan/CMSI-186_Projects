@@ -1,0 +1,9 @@
+BinaryClockSolver.java:78: error: invalid use of @return
+    * @return String version of number as binary
+      ^
+CircleSolver.java:52: warning: no @throws for java.io.IOException
+   public int[] coordsCircle1( String filename ) throws IOException {
+                ^
+CircleSolver.java:93: warning: no @throws for java.io.IOException
+    public int[] coordsCircle2( String filename ) throws IOException {
+                 ^
